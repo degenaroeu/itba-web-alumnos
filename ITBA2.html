@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITBA - Instituto Tecnológico de Buenos Aires</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #D600FE;
+            --color-secondary: #A200C9;
+            --color-tertiary: #011EFF;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Libre Franklin', sans-serif;}
+        body {
+            line-height: 1.6;
+            color: #333;}
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;}
+        .logo {
+            height: 40px;}
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;}
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size:  0.75rem;
+            font-weight: 700;}
+        .donate-btn {
+            background: transparent;
+            color: var(--color-tertiary);
+            border: 2px solid var(--color-tertiary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;}
+        .donate-btn:hover {
+            background: var(--color-tertiary);
+            color: white;}
+        .carousel {
+            margin-top: 74px;
+            position: relative;
+            overflow: hidden;
+            height: 600px;}
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;}
+        .carousel-slide.active {
+            opacity: 1;}
+        .slide-1 {
+            background: linear-gradient(rgba(210,0,254,0.9), rgba(162,0,201,0.9)), url('/placeholder.svg?height=600&width=1200');
+            background-size: cover;}
+        .carousel-content {
+            max-width: 800px;
+            color: white;}
+        .carousel-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;}
+        .carousel-subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;}
+        .carousel-btn {
+            background: white;
+            color: var(--color-tertiary);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;}
+        .carousel-dots {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;}
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;}
+        .dot.active {
+            background: white;}
+        .search-bar {
+            max-width: 800px;
+              margin: 3rem auto; position: absolute; top: 50%; transform: translateY(-50%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 1rem;
+            margin-top: 7%;
+        }
+        .search-icon {
+            color: var(--color-secondary);
+            margin-right: 0.5rem;}
+        .search-input {
+            flex-grow: 1;
+            border: none;
+            font-size: 1rem;
+            padding: 0.5rem;
+            outline: none;
+            font-family: 'Libre Franklin', sans-serif;}
+        .search-link {
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 800;
+            transition: background-color 0.3s ease;}
+        .search-link:hover {
+            background-color: var(--color-secondary);}
+        .latest-news {
+            padding: 4rem 2rem;}
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--color-tertiary);}
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;}
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;}
+        .news-content {
+            padding: 1.5rem;}
+        .news-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--color-tertiary);}
+        .news-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-weight: 400;}
+        .news-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;}
+        .events {
+            padding: 4rem 2rem;
+            background: #f5f5f5;}
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;}
+        .event-card {
+            position: relative;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;}
+        .event-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;}
+        .event-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(1,30,255,0.3), rgba(1,30,255,0.7));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;}
+        .event-location {
+            display: inline-block;
+            background: var(--color-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 800;}
+        .event-date {
+            font-size: 2rem;
+            font-weight: 800;}
+        .event-details {
+            font-size: 0.9rem;
+            font-weight: 400;}
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;}
+            .carousel-title {
+                font-size: 2rem;}
+            .carousel-subtitle {
+                font-size: 1.2rem;}
+            .section-title {
+                font-size: 2rem;}}
+        footer {
+            background-color: #0a0f1c;
+            color: white;
+            padding: 4rem 2rem;}
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2rem;}
+        .footer-logo {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;}
+        .footer-logo img {
+            filter: brightness(0) invert(1);
+            max-width: 100%;
+            height: auto;}
+        .footer-section {
+            display: flex;
+            flex-direction: column;}
+        .footer-title {
+            font-family: 'Libre Franklin', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;}
+        .footer-links {
+            list-style: none;
+            padding: 0;}
+        .footer-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: 'Libre Franklin', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 2;}
+        @media (max-width: 1200px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);}
+            .footer-logo {
+                grid-column: 1 / -1;
+                justify-self: center;
+                margin-bottom: 2rem;}}
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);}}
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;}
+            .footer-section {
+                text-align: center;}
+            @media (max-width: 1200px) {
+    .nav-links {
+        gap: 1rem; /* Reduce el espacio entre los elementos del menú */}
+    .nav-links a {
+        font-size:  0.7rem; /* Reduce aún más el tamaño de la fuente */}
+    .donate-btn {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;}}
+@media (max-width: 992px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;}
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        display: none; /* Oculta el menú por defecto en dispositivos más pequeños */}
+    .nav-links.active {
+        display: flex; /* Muestra el menú cuando está activo */}
+    .nav-links a, .donate-btn {
+        width: 100%;
+        text-align: left;
+        padding: 0.5rem 0;}
+    .donate-btn {
+        margin-top: 1rem;}
+    /* Añade un botón de hamburguesa para dispositivos móviles */
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        cursor: pointer;}}
+.menu-toggle {
+    display: none;}
+@media (max-width: 992px) {
+    .menu-toggle {
+        display: block;
+        cursor: pointer;}
+    .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        margin: 5px 0;
+        transition: all 0.3s ease;}}}
+        .text-background {
+    background-color: black; /* Fondo negro sólido */
+    padding: 5px 10px; /* Ajusta el padding según sea necesario */
+    display: inline-block; /* Hace que el fondo se ajuste al contenido */
+    line-height: 1.4; /* Ajusta según sea necesario para el espaciado vertical */}
+.carousel-title, .carousel-subtitle {
+    color: white; /* Asegura que el texto sea blanco */
+    margin-bottom: 10px; /* Espacio entre el título y el subtítulo */}
+.carousel-title span, .carousel-subtitle span {
+    box-decoration-break: clone; /* Asegura que el fondo se aplique a cada línea de texto */
+    -webkit-box-decoration-break: clone;}
+    #chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 320px;
+        font-family: 'Libre Franklin', sans-serif;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        overflow: hidden;
+        z-index: 1000;
+        background-color: white;
+    }
+
+    #chatbot-header {
+        background-color: var(--color-primary);
+        color: white;
+        padding: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-weight: 800;
+        border-bottom: 2px solid var(--color-secondary);
+    }
+
+    #chatbot-messages {
+        background-color: #f9f9f9;
+        height: 350px;
+        overflow-y: auto;
+        padding: 12px;
+        display: none;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: #333;
+    }
+
+    #chatbot-input-container {
+        display: flex;
+        padding: 10px;
+        display: none;
+        background-color: white;
+        border-top: 2px solid var(--color-secondary);
+    }
+
+    #chatbot-input {
+        flex-grow: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: 'Libre Franklin', sans-serif;
+    }
+
+    #chatbot-send {
+        background-color: var(--color-secondary);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin-left: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    #chatbot-send:hover {
+        background-color: var(--color-tertiary);
+    }
+
+    .message {
+        margin-bottom: 12px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .user-message {
+        background-color: var(--color-secondary);
+        color: white;
+        text-align: right;
+    }
+
+    .bot-message {
+        background-color: #eee;
+        color: #333;
+        text-align: left;
+    }    
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="/Users/estebandegenaro/Downloads/ITBA_ITBAAlumnos_Identidad_Logos-01.png?height=40&width=100" alt="ITBA Logo" class="logo">
+        <div class="nav-links">
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="#">Información Importante</a>
+            <a href="#">Tramites y Servicios</a>
+            <a href="#">Bienestar</a>
+            <a href="#">Desarrollo Profesional</a>
+            <a href="#">Iniciativas Estudiantiles</a>
+            <a href="#">On Boarding</a>
+            <a href="#">Intercambios</a>
+            <button class="donate-btn">ACCESO ALUMNOS</button>
+        </div>
+    </nav>
+    <div class="carousel">
+        <div class="carousel-slide slide-1 active" style="background-image: url('https://www.itba.edu.ar/wp-content/uploads/2021/07/nueva-sede-itba_jornada-06_14mayo-71-3-scaled-1.jpg'); background-size: cover; background-position: center;">
+            <div class="carousel-content">
+                <h1 class="carousel-title text-background">Inscripciones Abiertas 2025</h1>
+                <p class="carousel-subtitle text-background">Inscribite a las materias del proximo año</p>
+                <br><a href="#" class="carousel-btn">Ver más</a>
+            </div>
+        </div>
+        <div class="carousel-slide slide-2" style="background-image: url('https://www.itba.edu.ar/wp-content/uploads/2021/08/nueva-sede-itba_jornada-06_14mayo-39-1.jpg'); background-size: cover; background-position: center;">
+            <div class="carousel-content">
+                <h1 class="carousel-title text-background">Salas de Estudio</h1>
+                <br><p class="carousel-subtitle text-background">Entra y reserva tu sala</p>
+                <br><a href="#" class="carousel-btn">Reservar</a>
+            </div>
+        </div>
+        <div class="carousel-slide slide-3" style="background-image: url('https://www.itba.edu.ar/wp-content/uploads/2021/08/nueva-sede-itba_jornada-06_14mayo-30-1.jpg'); background-size: cover; background-position: center;">
+            <div class="carousel-content">
+                <h1 class="carousel-title text-background">Inteligencia Artificial</h1>
+                <br><p class="carousel-subtitle text-background">Nuevo programa</p>
+                <br><a href="#" class="carousel-btn">Ver Programa</a>
+            </div>
+        </div>
+        <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+    <section class="latest-news">
+        <center><h2 class="section-title">Ultima información</h2></center>
+        <div class="news-grid">
+            <article class="news-card">
+                <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/tech-trek-EI.jpg?height=200&width=300" alt="International Experience" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">Lorem Ipsum Placeholder</h3>
+                    <p class="news-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <a href="#" class="news-link">Leer más →</a>
+                </div>
+            </article>
+            <article class="news-card">
+                <img src="https://www.itba.edu.ar/wp-content/uploads/2024/06/Fachada-SDT-1-1-1080x675.jpg?height=200&width=300" alt="Advertising and Media" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">Lorem Ipsum Placeholder</h3>
+                    <p class="news-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <a href="#" class="news-link">Leer más →</a>
+                </div>
+            </article>
+            <article class="news-card">
+                <img src="https://www.clarin.com/2023/12/04/hY5hw6_ji_2000x1500__1.jpg?height=200&width=300" alt="Real Madrid Graduate School" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">Lorem Ipsum Placeholder</h3>
+                    <p class="news-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <a href="#" class="news-link">Leer más →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <section class="events">
+        <center><h2 class="section-title">Eventos</h2></center>
+        <div class="events-grid">
+            <div class="event-card">
+                <img src="https://images.adsttc.com/media/images/62c4/84ad/3e4b/31c3/5100/0004/newsletter/01._Render_Exterior_Desde_Av._Udaondo.jpg?1657046171?height=300&width=400" alt="Canarias Campus" class="event-image">
+                <div class="event-overlay">
+                    <span class="event-location">Lab de Inteligencia Artificial</span>
+                    <div>
+                        <div class="event-date">30</div>
+                        <div class="event-details">Noviembre</div>
+                        <p class="event-details">Virtual</p>
+                        <p class="event-details">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="event-card">
+                <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/IMG_2933-1-scaled-1.jpg?height=300&width=400" alt="Valencia Campus" class="event-image">
+                <div class="event-overlay">
+                    <span class="event-location">Charla sobre Deep Learning</span>
+                    <div>
+                        <div class="event-date">03</div>
+                        <div class="event-details">Diciembre</div>
+                        <p class="event-details">Virtual</p>
+                        <p class="event-details">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="event-card">
+                <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/edejec-home-scaled-1.jpg?height=300&width=400" alt="Valencia Virtual" class="event-image">
+                <div class="event-overlay">
+                    <span class="event-location">Charla sobre Python</span>
+                    <div>
+                        <div class="event-date">10</div>
+                        <div class="event-details">Diciembre</div>
+                        <p class="event-details">Presencial</p>
+                        <p class="event-details">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section>
+    <div class="search-bar">
+        <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" placeholder="¿Que estas buscando?">
+        <a href="#" class="search-link">Buscar</a>
+    </div>
+    <div id="chatbot-container">
+        <div id="chatbot-header" onclick="toggleChatbot()">
+            <span>Hola, escribime tu consulta 💬</span>
+            <span id="toggle-icon">▼</span>
+        </div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta...">
+            <button id="chatbot-send" onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+    <script>
+        const faqData = {
+            "Quiero informacion sobre matriculas": "Hace <a>click aca</a> y podras ver la informacion sobre matriculas",
+            "¿Cómo puedo contactarlos?": "Nos puede contactar por teléfono al 555-1234 o por correo electrónico a contacto@empresa.com",
+            "¿Cuál es su política de devoluciones?": "Aceptamos devoluciones dentro de los 30 días posteriores a la compra con el producto en condiciones originales.",
+            "¿Hacen envíos?": "Sí, realizamos envíos a nivel nacional con un costo adicional según la distancia.",
+            "¿Aceptan tarjetas de crédito?": "Aceptamos tarjetas Visa, MasterCard y American Express."
+        };
+
+        let isChatbotOpen = false;
+        const messagesContainer = document.getElementById('chatbot-messages');
+        const inputContainer = document.getElementById('chatbot-input-container');
+        const input = document.getElementById('chatbot-input');
+        const toggleIcon = document.getElementById('toggle-icon');
+
+        function toggleChatbot() {
+            isChatbotOpen = !isChatbotOpen;
+            messagesContainer.style.display = isChatbotOpen ? 'block' : 'none';
+            inputContainer.style.display = isChatbotOpen ? 'flex' : 'none';
+            toggleIcon.textContent = isChatbotOpen ? '▲' : '▼';
+        }
+
+        function addMessage(message, type) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', type);
+            messageElement.textContent = message;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function findAnswer(question) {
+            const normalizedQuestion = question.toLowerCase().trim();
+            for (let [faq, answer] of Object.entries(faqData)) {
+                if (normalizedQuestion.includes(faq.toLowerCase())) {
+                    return answer;
+                }
+            }
+            return "Lo siento, no encuentro una respuesta a tu pregunta. ¿Podrías ser más específico?";
+        }
+
+        function sendMessage() {
+            const userMessage = input.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, 'user-message');
+                const botResponse = findAnswer(userMessage);
+                setTimeout(() => {
+                    addMessage(botResponse, 'bot-message');
+                }, 500);
+                input.value = '';
+            }
+        }
+
+        input.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+<script>
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            slides[n].classList.add('active');
+            dots[n].classList.add('active');}
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);}
+        setInterval(nextSlide, 5000);
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);});});
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';} else {
+                navbar.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';}});
+    </script>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/ITBA-logo3.png?height=40&width=100" alt="ITBA Logo">
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Somos ITBA</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Institucional</a></li>
+                    <li><a href="#" class="footer-link">Autoridades</a></li>
+                    <li><a href="#" class="footer-link">Docentes</a></li>
+                    <li><a href="#" class="footer-link">Graduados</a></li>
+                    <li><a href="#" class="footer-link">Empleos y pasantías</a></li>
+                    <li><a href="#" class="footer-link">Experiencia ITBA</a></li>
+                    <li><a href="#" class="footer-link">Sedes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Oferta Académica</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Grado</a></li>
+                    <li><a href="#" class="footer-link">Postgrado</a></li>
+                    <li><a href="#" class="footer-link">Educación ejecutiva</a></li>
+                    <li><a href="#" class="footer-link">Doctorado</a></li>
+                    <li><a href="#" class="footer-link">Servicios Corporativos</a></li>
+                    <li><a href="#" class="footer-link">ITBA global</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Becas</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Ingreso Ingenierías</a></li>
+                    <li><a href="#" class="footer-link">Ingreso Licenciaturas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Investigación y desarrollo</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Extensión</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Campus</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Intranet</a></li>
+                    <li><a href="#" class="footer-link">Biblioteca</a></li>
+                    <li><a href="#" class="footer-link">Noticias</a></li>
+                    <li><a href="#" class="footer-link">Trabajá con nosotros</a></li>
+                    <li><a href="#" class="footer-link">Portal de Compras</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');});
+</script>
+</html>
