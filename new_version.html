@@ -33,7 +33,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.7rem 5%; /* Increased padding */
+            padding: 0.7rem 5%;
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
@@ -43,7 +43,7 @@
         }
 
         .logo {
-            height: 30px; /* Increased logo size */
+            height: 30px;
             transition: var(--transition);
         }
 
@@ -53,14 +53,14 @@
 
         .nav-links {
             display: flex;
-            gap: 1.5rem; /* Reduced gap between menu items */
+            gap: 1.5rem;
             align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--color-text);
-            font-size: 0.75rem; /* Further reduced font size */
+            font-size: 0.75rem;
             font-weight: 600;
             transition: var(--transition);
         }
@@ -73,9 +73,9 @@
             background: transparent;
             color: var(--color-primary);
             border: 2px solid var(--color-primary);
-            padding: 0.3rem 0.7rem; /* Slightly reduced padding */
+            padding: 0.3rem 0.7rem;
             border-radius: 50px;
-            font-size: 0.75rem; /* Reduced font size to match other menu items */
+            font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -87,7 +87,7 @@
         }
 
         .carousel {
-            margin-top: 54px; /* Adjusted to match the new navbar height */
+            margin-top: 54px;
             position: relative;
             overflow: hidden;
             height: 70vh;
@@ -437,6 +437,19 @@
             .section-title {
                 font-size: 2rem;
             }
+            .search-bar {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                padding: 0.5rem;
+            }
+            .search-input {
+                flex: 1;
+                margin-right: 0.5rem;
+            }
+            .search-link {
+                width: auto;
+            }
         }
 
         @media (max-width: 480px) {
@@ -445,6 +458,12 @@
             }
             .footer-section {
                 text-align: center;
+            }
+            .search-bar {
+                margin: 2rem 1rem;
+            }
+            .latest-news-section {
+                padding: 0 1rem;
             }
         }
     </style>
