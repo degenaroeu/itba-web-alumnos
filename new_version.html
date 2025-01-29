@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITBA - Instituto Tecnológico de Buenos Aires</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
             --color-primary: #0056b3;
@@ -33,7 +34,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.7rem 5%;
+            padding: 1rem 5%;
             background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
@@ -43,7 +44,7 @@
         }
 
         .logo {
-            height: 30px;
+            height: 40px;
             transition: var(--transition);
         }
 
@@ -60,7 +61,7 @@
         .nav-links a {
             text-decoration: none;
             color: var(--color-text);
-            font-size: 0.75rem;
+            font-size: 0.7rem; /* Update 1: Reduced font size */
             font-weight: 600;
             transition: var(--transition);
         }
@@ -70,27 +71,40 @@
         }
 
         .donate-btn {
-            background: transparent;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
-            padding: 0.3rem 0.7rem;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
         }
 
         .donate-btn:hover {
-            background: var(--color-primary);
-            color: white;
+            background: var(--color-secondary);
+        }
+
+        .main-content {
+            display: flex;
+            margin-top: 74px;
+            padding: 2rem 5%;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .carousel-container {
+            width: 70%;
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
         }
 
         .carousel {
-            margin-top: 54px;
+            width: 100%;
+            height: 100%;
             position: relative;
-            overflow: hidden;
-            height: 70vh;
         }
 
         .carousel-slide {
@@ -101,12 +115,14 @@
             height: 100%;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
-            padding: 4rem 5%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             background-size: cover;
             background-position: center;
+            padding: 4rem 5%;
+            background-blend-mode: darken; /* Update 2: Added background blend mode */
+            background-color: rgba(0, 0, 0, 0.4); /* Update 2: Added background color */
         }
 
         .carousel-slide.active {
@@ -117,6 +133,9 @@
             max-width: 800px;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.6); /* Update 2: Added background color */
+            border-radius: 10px; /* Update 2: Added border radius */
         }
 
         .carousel-title {
@@ -149,121 +168,17 @@
             transform: translateY(-3px);
         }
 
-        .search-bar {
-            max-width: 800px;
-            margin: 2rem auto;
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 0.5rem 1rem;
-            transition: var(--transition);
-        }
-
-        .search-bar:focus-within {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .search-icon {
-            color: var(--color-secondary);
-            margin-right: 0.5rem;
-        }
-
-        .search-input {
-            flex-grow: 1;
-            border: none;
-            font-size: 1rem;
-            padding: 0.5rem;
-            outline: none;
-        }
-
-        .search-link {
-            background: var(--color-primary);
-            color: white;
-            text-decoration: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .search-link:hover {
-            background-color: var(--color-secondary);
-            transform: translateY(-2px);
-        }
-
-        .latest-news-section {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 5%;
-        }
-
-        .news-column {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .news-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: var(--transition);
-        }
-
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        .news-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .news-content {
-            padding: 1.5rem;
-        }
-
-        .news-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--color-primary);
-        }
-
-        .news-description {
-            color: var(--color-text-light);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        .news-link {
-            color: var(--color-accent);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .news-link:hover {
-            color: var(--color-primary);
-        }
-
         .events-timeline {
+            width: 30%;
+            height: 70vh;
             background: white;
             border-radius: 10px;
             padding: 1.5rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            align-self: flex-start;
+            position: sticky;
+            top: 90px;
         }
 
         .timeline-title {
@@ -316,6 +231,142 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .event-more-btn {
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        .event-more-btn:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        .search-bar {
+            max-width: 800px;
+            margin: 2rem auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
+        }
+
+        .search-bar:focus-within {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-icon {
+            color: var(--color-secondary);
+            margin-right: 0.5rem;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            border: none;
+            font-size: 1rem;
+            padding: 0.5rem;
+            outline: none;
+        }
+
+        .search-link {
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .search-link:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-2px);
+        }
+
+        .latest-news-section {
+            display: flex; /* Update 3: Changed display to flex */
+            flex-direction: column; /* Update 3: Added flex-direction */
+            align-items: center; /* Update 3: Added align-items */
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto;
+        }
+
+        .news-cards-container { /* Update 3: Added news-cards-container styles */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .news-description {
+            color: var(--color-text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .news-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .news-link:hover {
+            color: var(--color-primary);
         }
 
         .section-title {
@@ -386,24 +437,6 @@
             color: white;
         }
 
-        .event-more-btn {
-            background-color: transparent;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
-            padding: 0.4rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 0.5rem;
-        }
-
-        .event-more-btn:hover {
-            background-color: var(--color-primary);
-            color: white;
-        }
-
         @media (max-width: 1200px) {
             .footer-container {
                 grid-template-columns: repeat(3, 1fr);
@@ -415,16 +448,23 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .latest-news-section {
-                grid-template-columns: 1fr;
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
             }
+
+            .carousel-container, .events-timeline {
+                width: 100%;
+            }
+
             .events-timeline {
-                margin-top: 2rem;
+                height: auto;
+                max-height: 50vh;
+                position: static;
             }
-            .footer-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        }
+
+        @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
@@ -438,22 +478,22 @@
                 font-size: 2rem;
             }
             .search-bar {
-        margin: 2rem 1rem;
-        width: auto;
-        padding: 0.5rem;
-    }
+                margin: 2rem 1rem;
+                width: auto;
+                padding: 0.5rem;
+            }
 
-    .search-input {
-        width: 100%;
-        min-width: 0;
-        margin-right: 0.5rem;
-    }
+            .search-input {
+                width: 100%;
+                min-width: 0;
+                margin-right: 0.5rem;
+            }
 
-    .search-link {
-        white-space: nowrap;
-        padding: 0.7rem 1rem;
-    }
-}
+            .search-link {
+                white-space: nowrap;
+                padding: 0.7rem 1rem;
+            }
+        }
 
         @media (max-width: 480px) {
             .footer-container {
@@ -463,10 +503,10 @@
                 text-align: center;
             }
             .search-bar {
-        margin: 2rem 1rem;
-        width: calc(100% - 2rem);
-        box-sizing: border-box;
-    }
+                margin: 2rem 1rem;
+                width: calc(100% - 2rem);
+                box-sizing: border-box;
+            }
             .latest-news-section {
                 padding: 0 1rem;
             }
@@ -488,46 +528,19 @@
         </div>
     </nav>
 
-    <div class="carousel">
-        <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.itba.edu.ar/wp-content/uploads/2021/07/nueva-sede-itba_jornada-06_14mayo-71-3-scaled-1.jpg');">
-            <div class="carousel-content">
-                <h1 class="carousel-title">Inscripciones Abiertas 2025</h1>
-                <p class="carousel-subtitle">Inscribite a las materias del próximo año</p>
-                <a href="#" class="carousel-btn">Ver más</a>
+    <div class="main-content">
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.itba.edu.ar/wp-content/uploads/2021/07/nueva-sede-itba_jornada-06_14mayo-71-3-scaled-1.jpg');">
+                    <div class="carousel-content">
+                        <h1 class="carousel-title">Inscripciones Abiertas 2025</h1>
+                        <p class="carousel-subtitle">Inscribite a las materias del próximo año</p>
+                        <a href="#" class="carousel-btn">Ver más</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="search-bar">
-        <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" class="search-input" placeholder="¿Qué estás buscando?">
-        <a href="#" class="search-link">Buscar</a>
-    </div>
-
-    <section class="latest-news-section">
-        <div class="news-column">
-            <h2 class="section-title">Ultima información</h2>
-            <article class="news-card">
-                <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/tech-trek-EI.jpg" alt="International Experience" class="news-image">
-                <div class="news-content">
-                    <h3 class="news-title">Lorem Ipsum Placeholder</h3>
-                    <p class="news-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <a href="#" class="news-link">Leer más →</a>
-                </div>
-            </article>
-            <article class="news-card">
-                <img src="https://www.itba.edu.ar/wp-content/uploads/2024/06/Fachada-SDT-1-1-1080x675.jpg" alt="Advertising and Media" class="news-image">
-                <div class="news-content">
-                    <h3 class="news-title">Lorem Ipsum Placeholder</h3>
-                    <p class="news-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <a href="#" class="news-link">Leer más →</a>
-                </div>
-            </article>
-        </div>
-    
         <div class="events-timeline">
             <h3 class="timeline-title">Fechas Importantes</h3>
             <div class="timeline-event">
@@ -548,15 +561,50 @@
                 <div class="event-location">Limite: 30/4/25 12:00 a.m.</div>
                 <button class="event-more-btn">Ver más</button>
             </div>
-            <div class="timeline-event">
-                <div class="event-date">24/3/25</div>
-                <h4 class="event-title">Inicio de Clases</h4>
-                <div class="event-location">1/05/2025 12:00 a.m.</div>
-                <button class="event-more-btn">Ver más</button>
-            </div>
         </div>
-    </section>
-    
+    </div>
+
+    <div class="content-wrapper">
+        <div class="search-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="search-input" placeholder="¿Qué estás buscando?">
+            <a href="#" class="search-link">Buscar</a>
+        </div>
+
+        <section class="latest-news-section">
+            <h2 class="section-title">Última información</h2>
+            <div class="news-cards-container">  <!-- Update 3: Added news-cards-container div -->
+                <article class="news-card">
+                    <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/tech-trek-EI.jpg" alt="International Experience" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Lorem Ipsum Placeholder</h3>
+                        <p class="news-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <a href="#" class="news-link">Leer más →</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img src="https://www.itba.edu.ar/wp-content/uploads/2024/06/Fachada-SDT-1-1-1080x675.jpg" alt="Advertising and Media" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Lorem Ipsum Placeholder</h3>
+                        <p class="news-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <a href="#" class="news-link">Leer más →</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img src="https://www.itba.edu.ar/wp-content/uploads/2021/07/nueva-sede-itba_jornada-06_14mayo-71-3-scaled-1.jpg" alt="New Campus" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Lorem Ipsum Placeholder</h3>
+                        <p class="news-description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <a href="#" class="news-link">Leer más →</a>
+                    </div>
+                </article>
+            </div>  <!-- Update 3: Closing news-cards-container div -->
+        </section>
+    </div>
+
     <footer>
         <div class="footer-container">
             <div class="footer-logo">
