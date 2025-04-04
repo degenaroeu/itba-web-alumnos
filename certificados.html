@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITBA - Certificaciones y Trámites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #0056b3;
+            --color-secondary: #004085;
+            --color-accent: #17a2b8;
+            --color-background: #f8f9fa;
+            --color-text: #333;
+            --color-text-light: #6c757d;
+            --transition: all 0.3s ease;
+            
+            /* Colores para el menú */
+            --color-menu-1: #4ecdc4; /* Turquesa */
+            --color-menu-2: #6c757d; /* Gris */
+            --color-menu-3: #7ea6e0; /* Azul */
+            --color-menu-4: #a17dc3; /* Púrpura */
+            --color-menu-5: #b5c689; /* Verde */
+            --color-menu-6: #f8a978; /* Naranja */
+            --color-menu-7: #e5989b; /* Rosa */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            height: 50px;
+            transition: var(--transition);
+            padding: 10px 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: stretch;
+            height: 50px;
+        }
+
+        /* Nuevo estilo para el menú con submenús */
+        .nav-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item > a {
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0 1.2rem;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            white-space: nowrap;
+            color: white;
+        }
+
+        /* Colores específicos para cada elemento del menú - ahora con fondo de color */
+        .nav-item:nth-child(1) > a {
+            background-color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) > a {
+            background-color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) > a {
+            background-color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) > a {
+            background-color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) > a {
+            background-color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) > a {
+            background-color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) > a {
+            background-color: var(--color-menu-7);
+        }
+
+        /* Hover para cada elemento del menú - ajustado para el nuevo estilo */
+        .nav-item:nth-child(1) > a:hover, .nav-item:nth-child(1):hover > a {
+            background-color: var(--color-menu-1);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(2) > a:hover, .nav-item:nth-child(2):hover > a {
+            background-color: var(--color-menu-2);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(3) > a:hover, .nav-item:nth-child(3):hover > a {
+            background-color: var(--color-menu-3);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(4) > a:hover, .nav-item:nth-child(4):hover > a {
+            background-color: var(--color-menu-4);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(5) > a:hover, .nav-item:nth-child(5):hover > a {
+            background-color: var(--color-menu-5);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(6) > a:hover, .nav-item:nth-child(6):hover > a {
+            background-color: var(--color-menu-6);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(7) > a:hover, .nav-item:nth-child(7):hover > a {
+            background-color: var(--color-menu-7);
+            opacity: 0.9;
+        }
+
+        /* Modificar los estilos de los submenús para que usen posicionamiento relativo al elemento padre */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 180px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .mega-submenu {
+            position: absolute;
+            top: 100%;
+            left: -200px;
+            background: white;
+            width: 800px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+
+        .nav-item:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu-header {
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+            font-size: 0.7rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Colores para los encabezados de submenú */
+        .nav-item:nth-child(1) .submenu-header {
+            background-color: var(--color-menu-1);
+            color: white;
+        }
+        .nav-item:nth-child(2) .submenu-header {
+            background-color: var(--color-menu-2);
+            color: white;
+        }
+        .nav-item:nth-child(3) .submenu-header {
+            background-color: var(--color-menu-3);
+            color: white;
+        }
+        .nav-item:nth-child(4) .submenu-header {
+            background-color: var(--color-menu-4);
+            color: white;
+        }
+        .nav-item:nth-child(5) .submenu-header {
+            background-color: var(--color-menu-5);
+            color: white;
+        }
+        .nav-item:nth-child(6) .submenu-header {
+            background-color: var(--color-menu-6);
+            color: white;
+        }
+        .nav-item:nth-child(7) .submenu-header {
+            background-color: var(--color-menu-7);
+            color: white;
+        }
+
+        .submenu-item {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.7rem;
+            transition: var(--transition);
+            display: block;
+            text-decoration: none;
+        }
+
+        /* Colores para los elementos del submenú */
+        .nav-item:nth-child(1) .submenu-item {
+            color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) .submenu-item {
+            color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) .submenu-item {
+            color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) .submenu-item {
+            color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) .submenu-item {
+            color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) .submenu-item {
+            color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) .submenu-item {
+            color: var(--color-menu-7);
+        }
+
+        /* Hover para los elementos del submenú */
+        .nav-item:nth-child(1) .submenu-item:hover {
+            background-color: rgba(78, 205, 196, 0.1);
+        }
+        .nav-item:nth-child(2) .submenu-item:hover {
+            background-color: rgba(108, 117, 125, 0.1);
+        }
+        .nav-item:nth-child(3) .submenu-item:hover {
+            background-color: rgba(126, 166, 224, 0.1);
+        }
+        .nav-item:nth-child(4) .submenu-item:hover {
+            background-color: rgba(161, 125, 195, 0.1);
+        }
+        .nav-item:nth-child(5) .submenu-item:hover {
+            background-color: rgba(181, 198, 137, 0.1);
+        }
+        .nav-item:nth-child(6) .submenu-item:hover {
+            background-color: rgba(248, 169, 120, 0.1);
+        }
+        .nav-item:nth-child(7) .submenu-item:hover {
+            background-color: rgba(229, 152, 155, 0.1);
+        }
+
+        /* Estilos para el submenú de tres columnas */
+        .mega-submenu {
+            position: absolute;
+            top: 100%;
+            left: -200px;
+            background: white;
+            width: 800px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+
+        .nav-item:hover .mega-submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-submenu-header {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Colores para los encabezados de mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-header {
+            background-color: var(--color-menu-1);
+            color: white;
+        }
+        .nav-item:nth-child(2) .mega-submenu-header {
+            background-color: var(--color-menu-2);
+            color: white;
+        }
+        .nav-item:nth-child(3) .mega-submenu-header {
+            background-color: var(--color-menu-3);
+            color: white;
+        }
+        .nav-item:nth-child(4) .mega-submenu-header {
+            background-color: var(--color-menu-4);
+            color: white;
+        }
+        .nav-item:nth-child(5) .mega-submenu-header {
+            background-color: var(--color-menu-5);
+            color: white;
+        }
+        .nav-item:nth-child(6) .mega-submenu-header {
+            background-color: var(--color-menu-6);
+            color: white;
+        }
+        .nav-item:nth-child(7) .mega-submenu-header {
+            background-color: var(--color-menu-7);
+            color: white;
+        }
+
+        .mega-submenu-column {
+            width: 33.33%;
+            padding: 0 0.5rem;
+        }
+
+        .mega-submenu-column.half {
+            width: 50%;
+        }
+
+        .mega-submenu-column.full {
+            width: 100%;
+        }
+
+        .mega-submenu-section {
+            margin-bottom: 1rem;
+        }
+
+        .mega-submenu-section-title {
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Colores para los títulos de sección */
+        .nav-item:nth-child(1) .mega-submenu-section-title {
+            color: var(--color-menu-1);
+            border-bottom-color: rgba(78, 205, 196, 0.3);
+        }
+        .nav-item:nth-child(2) .mega-submenu-section-title {
+            color: var(--color-menu-2);
+            border-bottom-color: rgba(108, 117, 125, 0.3);
+        }
+        .nav-item:nth-child(3) .mega-submenu-section-title {
+            color: var(--color-menu-3);
+            border-bottom-color: rgba(126, 166, 224, 0.3);
+        }
+        .nav-item:nth-child(4) .mega-submenu-section-title {
+            color: var(--color-menu-4);
+            border-bottom-color: rgba(161, 125, 195, 0.3);
+        }
+        .nav-item:nth-child(5) .mega-submenu-section-title {
+            color: var(--color-menu-5);
+            border-bottom-color: rgba(181, 198, 137, 0.3);
+        }
+        .nav-item:nth-child(6) .mega-submenu-section-title {
+            color: var(--color-menu-6);
+            border-bottom-color: rgba(248, 169, 120, 0.3);
+        }
+        .nav-item:nth-child(7) .mega-submenu-section-title {
+            color: var(--color-menu-7);
+            border-bottom-color: rgba(229, 152, 155, 0.3);
+        }
+
+        .mega-submenu-item {
+            padding: 0.3rem 0.5rem;
+            font-size: 0.65rem;
+            transition: var(--transition);
+            display: block;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        /* Colores para los elementos del mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-item {
+            color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) .mega-submenu-item {
+            color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) .mega-submenu-item {
+            color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) .mega-submenu-item {
+            color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) .mega-submenu-item {
+            color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) .mega-submenu-item {
+            color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) .mega-submenu-item {
+            color: var(--color-menu-7);
+        }
+
+        /* Hover para los elementos del mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-item:hover {
+            background-color: rgba(78, 205, 196, 0.1);
+        }
+        .nav-item:nth-child(2) .mega-submenu-item:hover {
+            background-color: rgba(108, 117, 125, 0.1);
+        }
+        .nav-item:nth-child(3) .mega-submenu-item:hover {
+            background-color: rgba(126, 166, 224, 0.1);
+        }
+        .nav-item:nth-child(4) .mega-submenu-item:hover {
+            background-color: rgba(161, 125, 195, 0.1);
+        }
+        .nav-item:nth-child(5) .mega-submenu-item:hover {
+            background-color: rgba(181, 198, 137, 0.1);
+        }
+        .nav-item:nth-child(6) .mega-submenu-item:hover {
+            background-color: rgba(248, 169, 120, 0.1);
+        }
+        .nav-item:nth-child(7) .mega-submenu-item:hover {
+            background-color: rgba(229, 152, 155, 0.1);
+        }
+
+        .donate-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 0 1.2rem;
+            height: 100%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        .donate-btn:hover {
+            background: var(--color-secondary);
+        }
+
+        footer {
+            background-color: #0a0f1c;
+            color: white;
+            padding: 4rem 5%;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .footer-logo img {
+            filter: brightness(0) invert(1);
+            max-width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .footer-logo img:hover {
+            opacity: 0.8;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 2;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        @media (max-width: 1200px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-logo {
+                grid-column: 1 / -1;
+                justify-self: center;
+                margin-bottom: 2rem;
+            }
+            .mega-submenu {
+                width: 600px;
+                left: -100px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            /* Ajustes para el menú en pantallas medianas */
+            .nav-links {
+                gap: 0;
+            }
+            
+            .nav-item > a {
+                font-size: 0.6rem;
+                padding: 0 0.5rem;
+            }
+            
+            .mega-submenu {
+                width: 500px;
+                left: -50px;
+            }
+            
+            .mega-submenu-column {
+                width: 50%;
+            }
+            
+            .mega-submenu-column:last-child {
+                width: 100%;
+            }
+
+            .certificacion-container {
+                flex-direction: column;
+            }
+
+            .certificacion-content, .certificacion-sidebar {
+                width: 100%;
+            }
+
+            .certificate-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .search-bar {
+                margin: 2rem 1rem;
+                width: auto;
+                padding: 0.5rem;
+            }
+
+            .search-input {
+                width: 100%;
+                min-width: 0;
+                margin-right: 0.5rem;
+            }
+
+            .search-link {
+                white-space: nowrap;
+                padding: 0.7rem 1rem;
+            }
+
+            .certificate-card {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            .footer-section {
+                text-align: center;
+            }
+            .search-bar {
+                margin: 2rem 1rem;
+                width: calc(100% - 2rem);
+                box-sizing: border-box;
+            }
+            .faq-item {
+                padding: 1rem;
+            }
+        }
+
+        /* Estilos específicos para la página de certificaciones */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://www.itba.edu.ar/wp-content/uploads/2021/07/nueva-sede-itba_jornada-06_14mayo-71-3-scaled-1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            margin-top: 50px;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .certificacion-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+            display: flex;
+            gap: 3rem;
+        }
+
+        .certificacion-content {
+            width: 70%;
+        }
+
+        .certificacion-sidebar {
+            width: 30%;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--color-accent);
+        }
+
+        .certificate-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .certificate-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .certificate-header {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .certificate-icon {
+            font-size: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .certificate-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .certificate-content {
+            padding: 1.5rem;
+        }
+
+        .certificate-description {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-text-light);
+        }
+
+        .certificate-link {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .certificate-link:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-3px);
+        }
+
+        .sidebar-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        .sidebar-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .sidebar-link {
+            display: block;
+            color: var(--color-primary);
+            text-decoration: none;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .sidebar-link:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-link:hover {
+            color: var(--color-accent);
+            padding-left: 0.5rem;
+        }
+
+        .sidebar-cta {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .sidebar-cta:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-3px);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .contact-text {
+            font-size: 0.9rem;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .info-note {
+            background-color: rgba(23, 162, 184, 0.1);
+            border-left: 4px solid var(--color-accent);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .info-note-title {
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-note-content {
+            font-size: 0.95rem;
+        }
+
+        .info-note-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-note-content p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="https://itba-web-alumnos.vercel.app/ITBA_ITBAAlumnos_Identidad_Logos-01.png?height=40&width=100" alt="ITBA Logo" class="logo">
+    </nav>
+
+    <header class="page-header">
+        <h1 class="page-title">Certificaciones y Trámites</h1>
+        <p class="page-subtitle">Información sobre certificados y trámites académicos</p>
+    </header>
+
+    <div class="certificacion-container">
+        <main class="certificacion-content">
+            <div class="info-note">
+                <h3 class="info-note-title">Información Importante</h3>
+                <div class="info-note-content">
+                    <p>Los certificados y trámites académicos son documentos oficiales emitidos por la universidad que acreditan tu condición de estudiante, tus calificaciones o tu trayectoria académica.</p>
+                    <p>Para solicitar cualquiera de estos documentos, deberás completar el formulario correspondiente y, en algunos casos, abonar un arancel según el tipo de certificado.</p>
+                </div>
+            </div>
+            
+            <section>
+                <h2 class="section-title">Certificados</h2>
+                
+                <div class="certificate-cards">
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <h3 class="certificate-title">Certificado de Alumno Regular</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Documento que acredita tu condición de alumno regular en la institución. Útil para trámites bancarios, obra social, transporte, etc.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <h3 class="certificate-title">Certificado Analítico de Notas</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Documento oficial que detalla todas las materias cursadas con sus respectivas calificaciones y fechas de aprobación.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="certificate-title">Certificado de Trayectoria Académica</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Documento que resume tu recorrido académico, incluyendo materias aprobadas, promedio y avance en la carrera.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h3 class="certificate-title">Pase Facultad</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Documento necesario para realizar un cambio de facultad o universidad, que incluye tu historial académico completo.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <h3 class="certificate-title">Certificado TOR</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Transcript of Records, documento internacional que detalla tu historial académico para intercambios o estudios en el exterior.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3 class="certificate-title">Certificado de Examen</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Documento que certifica la fecha y resultado de un examen específico, útil para justificar ausencias laborales.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-plane-departure"></i>
+                            </div>
+                            <h3 class="certificate-title">Work & Travel</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Certificado especial para participar en programas de trabajo y estudio en el extranjero durante el período vacacional.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">Trámites</h2>
+                
+                <div class="certificate-cards">
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="certificate-title">Título en Trámite</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Certificado que acredita que has completado todos los requisitos académicos y tu título está en proceso de emisión.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-card">
+                        <div class="certificate-header">
+                            <div class="certificate-icon">
+                                <i class="fas fa-file-signature"></i>
+                            </div>
+                            <h3 class="certificate-title">Plan de Carrera Legalizado</h3>
+                        </div>
+                        <div class="certificate-content">
+                            <p class="certificate-description">Documento oficial que detalla el plan de estudios de tu carrera, con todas las materias y requisitos para la graduación.</p>
+                            <a href="#" class="certificate-link">Solicitar</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="certificacion-sidebar">
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Información Útil</h3>
+                <div class="sidebar-content">
+                    <p>Los certificados se emiten en un plazo aproximado de 3 a 5 días hábiles desde la solicitud, dependiendo del tipo de documento.</p>
+                    <p>Algunos certificados pueden requerir el pago de un arancel. Consulta los costos actualizados en el formulario de solicitud.</p>
+                    <p>Recuerda que para solicitar cualquier certificado, no debes tener deudas administrativas ni de biblioteca.</p>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Enlaces Relacionados</h3>
+                <a href="#" class="sidebar-link">Calendario Académico</a>
+                <a href="#" class="sidebar-link">Documentación Obligatoria</a>
+                <a href="#" class="sidebar-link">Facturación</a>
+                <a href="#" class="sidebar-link">Inhibiciones</a>
+                <a href="#" class="sidebar-link">Graduaciones</a>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Contacto</h3>
+                <div class="contact-info">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Email:</div>
+                        <div>certificaciones@itba.edu.ar</div>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Teléfono:</div>
+                        <div>+54 11 2150-4800</div>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Horario de atención:</div>
+                        <div>Lunes a Viernes de 9:00 a 18:00</div>
+                    </div>
+                </div>
+                <a href="#" class="sidebar-cta">Solicitar Asesoría</a>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/ITBA-logo3.png" alt="ITBA Logo">
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Somos ITBA</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Institucional</a></li>
+                    <li><a href="#" class="footer-link">Autoridades</a></li>
+                    <li><a href="#" class="footer-link">Docentes</a></li>
+                    <li><a href="#" class="footer-link">Graduados</a></li>
+                    <li><a href="#" class="footer-link">Empleos y pasantías</a></li>
+                    <li><a href="#" class="footer-link">Experiencia ITBA</a></li>
+                    <li><a href="#" class="footer-link">Sedes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Oferta Académica</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Grado</a></li>
+                    <li><a href="#" class="footer-link">Postgrado</a></li>
+                    <li><a href="#" class="footer-link">Educación ejecutiva</a></li>
+                    <li><a href="#" class="footer-link">Doctorado</a></li>
+                    <li><a href="#" class="footer-link">Servicios Corporativos</a></li>
+                    <li><a href="#" class="footer-link">ITBA global</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Becas</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Ingreso Ingenierías</a></li>
+                    <li><a href="#" class="footer-link">Ingreso Licenciaturas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Investigación y desarrollo</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Extensión</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Campus</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Intranet</a></li>
+                    <li><a href="#" class="footer-link">Biblioteca</a></li>
+                    <li><a href="#" class="footer-link">Noticias</a></li>
+                    <li><a href="#" class="footer-link">Trabajá con nosotros</a></li>
+                    <li><a href="#" class="footer-link">Portal de Compras</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para ajustar la posición de los submenús
+        document.addEventListener('DOMContentLoaded', function() {
+            function adjustSubmenuPosition() {
+                const navItems = document.querySelectorAll('.nav-item');
+                
+                navItems.forEach(item => {
+                    const submenu = item.querySelector('.submenu, .mega-submenu');
+                    if (submenu) {
+                        // Restablecer la posición primero
+                        if (submenu.classList.contains('mega-submenu')) {
+                            submenu.style.left = '-200px'; // Valor original para mega-submenu
+                        } else {
+                            submenu.style.left = '0'; // Valor original para submenu normal
+                        }
+                        
+                        // Obtener las dimensiones y posiciones después de restablecer
+                        const itemRect = item.getBoundingClientRect();
+                        const submenuRect = submenu.getBoundingClientRect();
+                        const windowWidth = window.innerWidth;
+                        
+                        // Verificar si el submenú se sale por la derecha
+                        if (submenuRect.right > windowWidth) {
+                            // Calcular cuánto se sale
+                            const overflow = submenuRect.right - windowWidth;
+                            // Ajustar la posición
+                            const newLeft = submenu.classList.contains('mega-submenu') 
+                                ? parseInt(getComputedStyle(submenu).left) - overflow - 20 
+                                : -overflow - 20; // 20px de margen adicional
+                            
+                            submenu.style.left = `${newLeft}px`;
+                        }
+                    }
+                });
+            }
+            
+            // Aplicar el ajuste cuando el mouse entra en un elemento del menú
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('mouseenter', adjustSubmenuPosition);
+            });
+            
+            // También ajustar en el resize de la ventana
+            window.addEventListener('resize', adjustSubmenuPosition);
+        });
+    </script>
+</body>
+</html>
