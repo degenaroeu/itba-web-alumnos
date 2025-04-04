@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITBA - Exámenes Finales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #0056b3;
+            --color-secondary: #004085;
+            --color-accent: #17a2b8;
+            --color-background: #f8f9fa;
+            --color-text: #333;
+            --color-text-light: #6c757d;
+            --transition: all 0.3s ease;
+            
+            /* Colores para el menú */
+            --color-menu-1: #4ecdc4; /* Turquesa */
+            --color-menu-2: #6c757d; /* Gris */
+            --color-menu-3: #7ea6e0; /* Azul */
+            --color-menu-4: #a17dc3; /* Púrpura */
+            --color-menu-5: #b5c689; /* Verde */
+            --color-menu-6: #f8a978; /* Naranja */
+            --color-menu-7: #e5989b; /* Rosa */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            height: 50px;
+            transition: var(--transition);
+            padding: 10px 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: stretch;
+            height: 50px;
+        }
+
+        /* Nuevo estilo para el menú con submenús */
+        .nav-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item > a {
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0 1.2rem;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            white-space: nowrap;
+            color: white;
+        }
+
+        /* Colores específicos para cada elemento del menú - ahora con fondo de color */
+        .nav-item:nth-child(1) > a {
+            background-color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) > a {
+            background-color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) > a {
+            background-color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) > a {
+            background-color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) > a {
+            background-color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) > a {
+            background-color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) > a {
+            background-color: var(--color-menu-7);
+        }
+
+        /* Hover para cada elemento del menú - ajustado para el nuevo estilo */
+        .nav-item:nth-child(1) > a:hover, .nav-item:nth-child(1):hover > a {
+            background-color: var(--color-menu-1);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(2) > a:hover, .nav-item:nth-child(2):hover > a {
+            background-color: var(--color-menu-2);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(3) > a:hover, .nav-item:nth-child(3):hover > a {
+            background-color: var(--color-menu-3);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(4) > a:hover, .nav-item:nth-child(4):hover > a {
+            background-color: var(--color-menu-4);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(5) > a:hover, .nav-item:nth-child(5):hover > a {
+            background-color: var(--color-menu-5);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(6) > a:hover, .nav-item:nth-child(6):hover > a {
+            background-color: var(--color-menu-6);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(7) > a:hover, .nav-item:nth-child(7):hover > a {
+            background-color: var(--color-menu-7);
+            opacity: 0.9;
+        }
+
+        /* Modificar los estilos de los submenús para que usen posicionamiento relativo al elemento padre */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 180px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .mega-submenu {
+            position: absolute;
+            top: 100%;
+            left: -200px;
+            background: white;
+            width: 800px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+
+        .nav-item:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu-header {
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+            font-size: 0.7rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Colores para los encabezados de submenú */
+        .nav-item:nth-child(1) .submenu-header {
+            background-color: var(--color-menu-1);
+            color: white;
+        }
+        .nav-item:nth-child(2) .submenu-header {
+            background-color: var(--color-menu-2);
+            color: white;
+        }
+        .nav-item:nth-child(3) .submenu-header {
+            background-color: var(--color-menu-3);
+            color: white;
+        }
+        .nav-item:nth-child(4) .submenu-header {
+            background-color: var(--color-menu-4);
+            color: white;
+        }
+        .nav-item:nth-child(5) .submenu-header {
+            background-color: var(--color-menu-5);
+            color: white;
+        }
+        .nav-item:nth-child(6) .submenu-header {
+            background-color: var(--color-menu-6);
+            color: white;
+        }
+        .nav-item:nth-child(7) .submenu-header {
+            background-color: var(--color-menu-7);
+            color: white;
+        }
+
+        .submenu-item {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.7rem;
+            transition: var(--transition);
+            display: block;
+            text-decoration: none;
+        }
+
+        /* Colores para los elementos del submenú */
+        .nav-item:nth-child(1) .submenu-item {
+            color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) .submenu-item {
+            color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) .submenu-item {
+            color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) .submenu-item {
+            color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) .submenu-item {
+            color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) .submenu-item {
+            color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) .submenu-item {
+            color: var(--color-menu-7);
+        }
+
+        /* Hover para los elementos del submenú */
+        .nav-item:nth-child(1) .submenu-item:hover {
+            background-color: rgba(78, 205, 196, 0.1);
+        }
+        .nav-item:nth-child(2) .submenu-item:hover {
+            background-color: rgba(108, 117, 125, 0.1);
+        }
+        .nav-item:nth-child(3) .submenu-item:hover {
+            background-color: rgba(126, 166, 224, 0.1);
+        }
+        .nav-item:nth-child(4) .submenu-item:hover {
+            background-color: rgba(161, 125, 195, 0.1);
+        }
+        .nav-item:nth-child(5) .submenu-item:hover {
+            background-color: rgba(181, 198, 137, 0.1);
+        }
+        .nav-item:nth-child(6) .submenu-item:hover {
+            background-color: rgba(248, 169, 120, 0.1);
+        }
+        .nav-item:nth-child(7) .submenu-item:hover {
+            background-color: rgba(229, 152, 155, 0.1);
+        }
+
+        /* Estilos para el submenú de tres columnas */
+        .mega-submenu {
+            position: absolute;
+            top: 100%;
+            left: -200px;
+            background: white;
+            width: 800px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+
+        .nav-item:hover .mega-submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-submenu-header {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Colores para los encabezados de mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-header {
+            background-color: var(--color-menu-1);
+            color: white;
+        }
+        .nav-item:nth-child(2) .mega-submenu-header {
+            background-color: var(--color-menu-2);
+            color: white;
+        }
+        .nav-item:nth-child(3) .mega-submenu-header {
+            background-color: var(--color-menu-3);
+            color: white;
+        }
+        .nav-item:nth-child(4) .mega-submenu-header {
+            background-color: var(--color-menu-4);
+            color: white;
+        }
+        .nav-item:nth-child(5) .mega-submenu-header {
+            background-color: var(--color-menu-5);
+            color: white;
+        }
+        .nav-item:nth-child(6) .mega-submenu-header {
+            background-color: var(--color-menu-6);
+            color: white;
+        }
+        .nav-item:nth-child(7) .mega-submenu-header {
+            background-color: var(--color-menu-7);
+            color: white;
+        }
+
+        .mega-submenu-column {
+            width: 33.33%;
+            padding: 0 0.5rem;
+        }
+
+        .mega-submenu-column.half {
+            width: 50%;
+        }
+
+        .mega-submenu-column.full {
+            width: 100%;
+        }
+
+        .mega-submenu-section {
+            margin-bottom: 1rem;
+        }
+
+        .mega-submenu-section-title {
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Colores para los títulos de sección */
+        .nav-item:nth-child(1) .mega-submenu-section-title {
+            color: var(--color-menu-1);
+            border-bottom-color: rgba(78, 205, 196, 0.3);
+        }
+        .nav-item:nth-child(2) .mega-submenu-section-title {
+            color: var(--color-menu-2);
+            border-bottom-color: rgba(108, 117, 125, 0.3);
+        }
+        .nav-item:nth-child(3) .mega-submenu-section-title {
+            color: var(--color-menu-3);
+            border-bottom-color: rgba(126, 166, 224, 0.3);
+        }
+        .nav-item:nth-child(4) .mega-submenu-section-title {
+            color: var(--color-menu-4);
+            border-bottom-color: rgba(161, 125, 195, 0.3);
+        }
+        .nav-item:nth-child(5) .mega-submenu-section-title {
+            color: var(--color-menu-5);
+            border-bottom-color: rgba(181, 198, 137, 0.3);
+        }
+        .nav-item:nth-child(6) .mega-submenu-section-title {
+            color: var(--color-menu-6);
+            border-bottom-color: rgba(248, 169, 120, 0.3);
+        }
+        .nav-item:nth-child(7) .mega-submenu-section-title {
+            color: var(--color-menu-7);
+            border-bottom-color: rgba(229, 152, 155, 0.3);
+        }
+
+        .mega-submenu-item {
+            padding: 0.3rem 0.5rem;
+            font-size: 0.65rem;
+            transition: var(--transition);
+            display: block;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        /* Colores para los elementos del mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-item {
+            color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) .mega-submenu-item {
+            color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) .mega-submenu-item {
+            color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) .mega-submenu-item {
+            color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) .mega-submenu-item {
+            color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) .mega-submenu-item {
+            color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) .mega-submenu-item {
+            color: var(--color-menu-7);
+        }
+
+        /* Hover para los elementos del mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-item:hover {
+            background-color: rgba(78, 205, 196, 0.1);
+        }
+        .nav-item:nth-child(2) .mega-submenu-item:hover {
+            background-color: rgba(108, 117, 125, 0.1);
+        }
+        .nav-item:nth-child(3) .mega-submenu-item:hover {
+            background-color: rgba(126, 166, 224, 0.1);
+        }
+        .nav-item:nth-child(4) .mega-submenu-item:hover {
+            background-color: rgba(161, 125, 195, 0.1);
+        }
+        .nav-item:nth-child(5) .mega-submenu-item:hover {
+            background-color: rgba(181, 198, 137, 0.1);
+        }
+        .nav-item:nth-child(6) .mega-submenu-item:hover {
+            background-color: rgba(248, 169, 120, 0.1);
+        }
+        .nav-item:nth-child(7) .mega-submenu-item:hover {
+            background-color: rgba(229, 152, 155, 0.1);
+        }
+
+        .donate-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 0 1.2rem;
+            height: 100%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        .donate-btn:hover {
+            background: var(--color-secondary);
+        }
+
+        footer {
+            background-color: #0a0f1c;
+            color: white;
+            padding: 4rem 5%;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .footer-logo img {
+            filter: brightness(0) invert(1);
+            max-width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .footer-logo img:hover {
+            opacity: 0.8;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 2;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        @media (max-width: 1200px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-logo {
+                grid-column: 1 / -1;
+                justify-self: center;
+                margin-bottom: 2rem;
+            }
+            .mega-submenu {
+                width: 600px;
+                left: -100px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            /* Ajustes para el menú en pantallas medianas */
+            .nav-links {
+                gap: 0;
+            }
+            
+            .nav-item > a {
+                font-size: 0.6rem;
+                padding: 0 0.5rem;
+            }
+            
+            .mega-submenu {
+                width: 500px;
+                left: -50px;
+            }
+            
+            .mega-submenu-column {
+                width: 50%;
+            }
+            
+            .mega-submenu-column:last-child {
+                width: 100%;
+            }
+
+            .examenes-container {
+                flex-direction: column;
+            }
+
+            .examenes-content, .examenes-sidebar {
+                width: 100%;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .search-bar {
+                margin: 2rem 1rem;
+                width: auto;
+                padding: 0.5rem;
+            }
+
+            .search-input {
+                width: 100%;
+                min-width: 0;
+                margin-right: 0.5rem;
+            }
+
+            .search-link {
+                white-space: nowrap;
+                padding: 0.7rem 1rem;
+            }
+
+            .info-card {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            .footer-section {
+                text-align: center;
+            }
+            .search-bar {
+                margin: 2rem 1rem;
+                width: calc(100% - 2rem);
+                box-sizing: border-box;
+            }
+            .faq-item {
+                padding: 1rem;
+            }
+        }
+
+        /* Estilos específicos para la página de exámenes finales */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://www.itba.edu.ar/wp-content/uploads/2021/07/nueva-sede-itba_jornada-06_14mayo-71-3-scaled-1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            margin-top: 50px;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .examenes-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+            display: flex;
+            gap: 3rem;
+        }
+
+        .examenes-content {
+            width: 70%;
+        }
+
+        .examenes-sidebar {
+            width: 30%;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--color-accent);
+        }
+
+        .info-link {
+            display: inline-block;
+            margin: 1rem 0 2rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--color-primary);
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .info-link:hover {
+            background-color: var(--color-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .info-link i {
+            margin-right: 0.5rem;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .info-card-header {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .info-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .info-card-content {
+            padding: 1.5rem;
+        }
+
+        .info-card-description {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .faq-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .faq-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            background-color: var(--color-primary);
+            padding: 1.5rem;
+            margin: 0;
+        }
+
+        .faq-list {
+            list-style: none;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding: 1.5rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '\f078';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .sidebar-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        .sidebar-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .sidebar-link {
+            display: block;
+            color: var(--color-primary);
+            text-decoration: none;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .sidebar-link:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-link:hover {
+            color: var(--color-accent);
+            padding-left: 0.5rem;
+        }
+
+        .sidebar-cta {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .sidebar-cta:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-3px);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .contact-text {
+            font-size: 0.9rem;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="https://itba-web-alumnos.vercel.app/ITBA_ITBAAlumnos_Identidad_Logos-01.png?height=40&width=100" alt="ITBA Logo" class="logo">
+        <div class="nav-links">
+            <div class="nav-item">
+                <a href="#">Info ITBA</a>
+                <div class="mega-submenu">
+                    <div class="mega-submenu-header">Info ITBA</div>
+                    
+                    <div class="mega-submenu-column">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Información Académica</div>
+                            <a href="#" class="mega-submenu-item">Calendario académico</a>
+                            <a href="#" class="mega-submenu-item">Matriculación Materias, SAT, PPS</a>
+                            <a href="#" class="mega-submenu-item">Exámenes Finales</a>
+                            <a href="#" class="mega-submenu-item">Validación inglés</a>
+                            <a href="#" class="mega-submenu-item">Grillas</a>
+                            <a href="#" class="mega-submenu-item">Planes de estudio</a>
+                        </div>
+                        
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Información Administrativa</div>
+                            <a href="#" class="mega-submenu-item">Certificaciones</a>
+                            <a href="#" class="mega-submenu-item">Documentación Obligatoria</a>
+                            <a href="#" class="mega-submenu-item">Facturación</a>
+                            <a href="#" class="mega-submenu-item">Inhibiciones</a>
+                            <a href="#" class="mega-submenu-item">Graduaciones</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mega-submenu-column">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Experiencia Académica</div>
+                            <a href="#" class="mega-submenu-item">Ayudantías</a>
+                            <a href="#" class="mega-submenu-item">Tareas en la universidad</a>
+                            <a href="#" class="mega-submenu-item">Proyectos</a>
+                        </div>
+                        
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Normativas</div>
+                            <a href="#" class="mega-submenu-item">Boletín general</a>
+                            <a href="#" class="mega-submenu-item">Reglamentaciones</a>
+                        </div>
+                        
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Becas y Préstamos</div>
+                            <a href="#" class="mega-submenu-item">Becas y Préstamos de honor</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mega-submenu-column">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Servicios</div>
+                            <a href="#" class="mega-submenu-item">Impresora</a>
+                            <a href="https://sites.google.com/itba.edu.ar/impresioneslaboratoriomd/p%C3%A1gina-principal" class="mega-submenu-item">Impresión 3D</a>
+                            <a href="#" class="mega-submenu-item">Lockers</a>
+                            <a href="#" class="mega-submenu-item">Préstamos</a>
+                            <a href="https://docs.google.com/forms/d/1_dYJj-oB96FLAMrsNqEYJeV5vc1JxlkKz4XDCSWJoy8/viewform?edit_requested=true#responses" class="mega-submenu-item">Donación de libros</a>
+                            <a href="#" class="mega-submenu-item">Kit de festejo responsable</a>
+                            <a href="#" class="mega-submenu-item">Aulas Libres</a>
+                            <a href="#" class="mega-submenu-item">Cronograma de aulas</a>
+                            <a href="#" class="mega-submenu-item">Reserva TuEspacioITBA</a>
+                            <a href="#" class="mega-submenu-item">Servicios TI para estudiantes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#">Trámites y Servicios</a>
+                <div class="mega-submenu">
+                    <div class="mega-submenu-header">Trámites y Servicios</div>
+                    
+                    <div class="mega-submenu-column">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Trámites y certificaciones</div>
+                            <a href="#" class="mega-submenu-item">Certificados</a>
+                            <a href="#" class="mega-submenu-item">Solicitudes</a>
+                        </div>
+                        
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Espacios</div>
+                            <a href="#" class="mega-submenu-item">Aulas Libres</a>
+                            <a href="#" class="mega-submenu-item">Reserva TuEspacioITBA</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mega-submenu-column">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Documentación</div>
+                            <a href="#" class="mega-submenu-item">Documentación Obligatoria</a>
+                            <a href="#" class="mega-submenu-item">Facturación</a>
+                            <a href="#" class="mega-submenu-item">Inhibiciones</a>
+                            <a href="#" class="mega-submenu-item">Graduaciones</a>
+                        </div>
+                        
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Normativas</div>
+                            <a href="#" class="mega-submenu-item">Boletín general</a>
+                            <a href="#" class="mega-submenu-item">Reglamentaciones</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mega-submenu-column">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Servicios</div>
+                            <a href="#" class="mega-submenu-item">Impresora</a>
+                            <a href="#" class="mega-submenu-item">Lockers</a>
+                            <a href="#" class="mega-submenu-item">Préstamos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#">Bienestar</a>
+                <div class="mega-submenu">
+                    <div class="mega-submenu-header">Bienestar</div>
+                    
+                    <div class="mega-submenu-column half">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Bienestar</div>
+                            <a href="#" class="mega-submenu-item">Apoyo Psicológico</a>
+                            <a href="#" class="mega-submenu-item">Deportes</a>
+                            <a href="#" class="mega-submenu-item">Actividades Culturales</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mega-submenu-column half">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Tutorías</div>
+                            <a href="#" class="mega-submenu-item">Tutorías académicas</a>
+                            <a href="#" class="mega-submenu-item">Tutorías personalizadas</a>
+                        </div>
+                        
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Becas</div>
+                            <a href="#" class="mega-submenu-item">Becas disponibles</a>
+                            <a href="#" class="mega-submenu-item">Requisitos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#">Desarrollo Profesional</a>
+                <div class="mega-submenu">
+                    <div class="mega-submenu-header">Desarrollo Profesional</div>
+                    
+                    <div class="mega-submenu-column half">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Ecosistema emprendedor</div>
+                            <a href="#" class="mega-submenu-item">Incubadora</a>
+                            <a href="#" class="mega-submenu-item">Aceleradora</a>
+                            <a href="#" class="mega-submenu-item">Eventos</a>
+                        </div>
+                        
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Recruitba</div>
+                            <a href="#" class="mega-submenu-item">Ofertas laborales</a>
+                            <a href="#" class="mega-submenu-item">Empresas asociadas</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mega-submenu-column half">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Pasantías</div>
+                            <a href="#" class="mega-submenu-item">Convocatorias</a>
+                            <a href="#" class="mega-submenu-item">Requisitos</a>
+                        </div>
+                        
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Redes</div>
+                            <a href="#" class="mega-submenu-item">ITBANet</a>
+                            <a href="#" class="mega-submenu-item">Programa de Mentorías</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#">Iniciativas Estudiantiles</a>
+                <div class="mega-submenu">
+                    <div class="mega-submenu-header">Iniciativas Estudiantiles</div>
+                    
+                    <div class="mega-submenu-column half">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">CEITBA</div>
+                            <a href="#" class="mega-submenu-item">Sobre CEITBA</a>
+                            <a href="#" class="mega-submenu-item">Actividades</a>
+                            <a href="#" class="mega-submenu-item">Beneficios</a>
+                            <a href="#" class="mega-submenu-item">Contacto</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mega-submenu-column half">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">Asociaciones</div>
+                            <a href="#" class="mega-submenu-item">Clubes estudiantiles</a>
+                            <a href="#" class="mega-submenu-item">Grupos de interés</a>
+                            <a href="#" class="mega-submenu-item">Competencias</a>
+                            <a href="#" class="mega-submenu-item">Voluntariado</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#">Onboarding</a>
+                <div class="submenu">
+                    <div class="submenu-header">Onboarding</div>
+                    <a href="#" class="submenu-item">Guía para nuevos estudiantes</a>
+                    <a href="#" class="submenu-item">Recorrido virtual</a>
+                    <a href="#" class="submenu-item">Preguntas frecuentes</a>
+                    <a href="#" class="submenu-item">Contactos importantes</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#">Intercambios</a>
+                <div class="mega-submenu">
+                    <div class="mega-submenu-header">Intercambios</div>
+                    
+                    <div class="mega-submenu-column half">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">IN</div>
+                            <a href="#" class="mega-submenu-item">Estudiantes internacionales</a>
+                            <a href="#" class="mega-submenu-item">Requisitos</a>
+                            <a href="#" class="mega-submenu-item">Alojamiento</a>
+                            <a href="#" class="mega-submenu-item">Vida en Buenos Aires</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mega-submenu-column half">
+                        <div class="mega-submenu-section">
+                            <div class="mega-submenu-section-title">OUT</div>
+                            <a href="#" class="mega-submenu-item">Destinos disponibles</a>
+                            <a href="#" class="mega-submenu-item">Requisitos</a>
+                            <a href="#" class="mega-submenu-item">Proceso de aplicación</a>
+                            <a href="#" class="mega-submenu-item">Becas internacionales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item">
+                <button class="donate-btn">ACCESO ALUMNOS</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 class="page-title">Exámenes Finales</h1>
+        <p class="page-subtitle">Información importante sobre el proceso de exámenes finales</p>
+    </header>
+
+    <div class="examenes-container">
+        <main class="examenes-content">
+            <section>
+                <h2 class="section-title">Exámenes Finales</h2>
+                <a href="#" class="info-link"><i class="fas fa-calendar-alt"></i> Ver fechas de exámenes finales</a>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <div class="info-card-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <h3 class="info-card-title">Examen Obligatorio</h3>
+                        </div>
+                        <div class="info-card-content">
+                            <p class="info-card-description">En el ITBA no existen materias promocionables. Una vez aprobada la cursada, deberás rendir el examen final para aprobar la materia.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <div class="info-card-icon">
+                                <i class="fas fa-redo-alt"></i>
+                            </div>
+                            <h3 class="info-card-title">Oportunidades</h3>
+                        </div>
+                        <div class="info-card-content">
+                            <p class="info-card-description">Tenés hasta 3 (tres) oportunidades durante 3 (tres) turnos ordinarios consecutivos para presentarte a rendir el examen final.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <div class="info-card-icon">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <h3 class="info-card-title">Correlatividad</h3>
+                        </div>
+                        <div class="info-card-content">
+                            <p class="info-card-description">Para inscribirte, debés cumplir con las materias correlativas previas aprobadas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <div class="info-card-icon">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <h3 class="info-card-title">Inscripción</h3>
+                        </div>
+                        <div class="info-card-content">
+                            <p class="info-card-description">Se realiza a través de SGA y cierra 48 horas antes del examen. Si no te inscribiste a tiempo, deberás esperar al próximo llamado.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <div class="info-card-icon">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <h3 class="info-card-title">Anulación</h3>
+                        </div>
+                        <div class="info-card-content">
+                            <p class="info-card-description">Si no vas a rendir, anulá tu inscripción hasta 48 horas antes para no perder una oportunidad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <div class="info-card-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <h3 class="info-card-title">Pagos</h3>
+                        </div>
+                        <div class="info-card-content">
+                            <p class="info-card-description">Asegurate de estar al día con las cuotas. Si estás inhibido, enviá tu comprobante a facturacion@itba.edu.ar. La desinhibición puede demorar al menos 24 horas hábiles.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-container">
+                <h2 class="faq-title">Preguntas Frecuentes</h2>
+                <ul class="faq-list">
+                    <li class="faq-item active">
+                        <div class="faq-question">¿Cuándo se publican las fechas de exámenes finales?</div>
+                        <div class="faq-answer">Las fechas de exámenes finales se publican con al menos un mes de anticipación en el calendario académico y en el SGA.</div>
+                    </li>
+                    <li class="faq-item">
+                        <div class="faq-question">¿Qué sucede si no apruebo el examen final en las tres oportunidades?</div>
+                        <div class="faq-answer">Si no aprobás el examen final en las tres oportunidades consecutivas, deberás recursar la materia completa.</div>
+                    </li>
+                    <li class="faq-item">
+                        <div class="faq-question">¿Puedo solicitar una mesa especial de examen?</div>
+                        <div class="faq-answer">En casos excepcionales y debidamente justificados, podés solicitar una mesa especial de examen a través de la Secretaría Académica. La solicitud debe presentarse con al menos 15 días de anticipación.</div>
+                    </li>
+                    <li class="faq-item">
+                        <div class="faq-question">¿Qué documentación debo presentar el día del examen?</div>
+                        <div class="faq-answer">El día del examen debés presentar tu DNI o pasaporte vigente. No se permitirá rendir sin identificación oficial.</div>
+                    </li>
+                    <li class="faq-item">
+                        <div class="faq-question">¿Cómo puedo ver mis notas de exámenes finales?</div>
+                        <div class="faq-answer">Las notas de los exámenes finales se publican en el SGA dentro de los 10 días hábiles posteriores a la fecha del examen.</div>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <aside class="examenes-sidebar">
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Próximos Exámenes</h3>
+                <div class="sidebar-content">
+                    <p><strong>Primer Llamado:</strong> 1/7/25 - 15/7/25</p>
+                    <p><strong>Segundo Llamado:</strong> 22/7/25 - 5/8/25</p>
+                    <p><strong>Tercer Llamado:</strong> 12/8/25 - 26/8/25</p>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Enlaces Útiles</h3>
+                <a href="#" class="sidebar-link">Calendario Académico</a>
+                <a href="#" class="sidebar-link">Reglamento de Exámenes</a>
+                <a href="#" class="sidebar-link">Correlatividades</a>
+                <a href="#" class="sidebar-link">Sistema de Gestión Académica</a>
+                <a href="#" class="sidebar-link">Solicitud de Mesa Especial</a>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Contacto</h3>
+                <div class="contact-info">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Email:</div>
+                        <div>alumnos@itba.edu.ar</div>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Teléfono:</div>
+                        <div>+54 11 2150-4800</div>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-label">Horario de atención:</div>
+                        <div>Lunes a Viernes de 9:00 a 18:00</div>
+                    </div>
+                </div>
+                <a href="#" class="sidebar-cta">Solicitar Asesoría</a>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/ITBA-logo3.png" alt="ITBA Logo">
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Somos ITBA</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Institucional</a></li>
+                    <li><a href="#" class="footer-link">Autoridades</a></li>
+                    <li><a href="#" class="footer-link">Docentes</a></li>
+                    <li><a href="#" class="footer-link">Graduados</a></li>
+                    <li><a href="#" class="footer-link">Empleos y pasantías</a></li>
+                    <li><a href="#" class="footer-link">Experiencia ITBA</a></li>
+                    <li><a href="#" class="footer-link">Sedes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Oferta Académica</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Grado</a></li>
+                    <li><a href="#" class="footer-link">Postgrado</a></li>
+                    <li><a href="#" class="footer-link">Educación ejecutiva</a></li>
+                    <li><a href="#" class="footer-link">Doctorado</a></li>
+                    <li><a href="#" class="footer-link">Servicios Corporativos</a></li>
+                    <li><a href="#" class="footer-link">ITBA global</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Becas</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Ingreso Ingenierías</a></li>
+                    <li><a href="#" class="footer-link">Ingreso Licenciaturas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Investigación y desarrollo</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Extensión</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Campus</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Intranet</a></li>
+                    <li><a href="#" class="footer-link">Biblioteca</a></li>
+                    <li><a href="#" class="footer-link">Noticias</a></li>
+                    <li><a href="#" class="footer-link">Trabajá con nosotros</a></li>
+                    <li><a href="#" class="footer-link">Portal de Compras</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para las preguntas frecuentes
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Cerrar otros items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle el item actual
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Función para ajustar la posición de los submenús
+            function adjustSubmenuPosition() {
+                const navItems = document.querySelectorAll('.nav-item');
+                
+                navItems.forEach(item => {
+                    const submenu = item.querySelector('.submenu, .mega-submenu');
+                    if (submenu) {
+                        // Restablecer la posición primero
+                        if (submenu.classList.contains('mega-submenu')) {
+                            submenu.style.left = '-200px'; // Valor original para mega-submenu
+                        } else {
+                            submenu.style.left = '0'; // Valor original para submenu normal
+                        }
+                        
+                        // Obtener las dimensiones y posiciones después de restablecer
+                        const itemRect = item.getBoundingClientRect();
+                        const submenuRect = submenu.getBoundingClientRect();
+                        const windowWidth = window.innerWidth;
+                        
+                        // Verificar si el submenú se sale por la derecha
+                        if (submenuRect.right > windowWidth) {
+                            // Calcular cuánto se sale
+                            const overflow = submenuRect.right - windowWidth;
+                            // Ajustar la posición
+                            const newLeft = submenu.classList.contains('mega-submenu') 
+                                ? parseInt(getComputedStyle(submenu).left) - overflow - 20 
+                                : -overflow - 20; // 20px de margen adicional
+                            
+                            submenu.style.left = `${newLeft}px`;
+                        }
+                    }
+                });
+            }
+            
+            // Aplicar el ajuste cuando el mouse entra en un elemento del menú
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('mouseenter', adjustSubmenuPosition);
+            });
+            
+            // También ajustar en el resize de la ventana
+            window.addEventListener('resize', adjustSubmenuPosition);
+        });
+    </script>
+</body>
+</html>
