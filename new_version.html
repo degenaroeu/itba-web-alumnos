@@ -15,6 +15,15 @@
             --color-text: #333;
             --color-text-light: #6c757d;
             --transition: all 0.3s ease;
+            
+            /* Colores para el menú */
+            --color-menu-1: #4ecdc4; /* Turquesa */
+            --color-menu-2: #6c757d; /* Gris */
+            --color-menu-3: #7ea6e0; /* Azul */
+            --color-menu-4: #a17dc3; /* Púrpura */
+            --color-menu-5: #b5c689; /* Verde */
+            --color-menu-6: #f8a978; /* Naranja */
+            --color-menu-7: #e5989b; /* Rosa */
         }
 
         * {
@@ -30,21 +39,18 @@
             background-color: var(--color-background);
         }
 
-        .navbar {
+        /* Nuevo estilo para el logo centrado */
+        .logo-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 1rem 5%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            padding: 1.5rem 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .logo {
-            height: 40px;
+            height: 60px; /* Logo más grande */
             transition: var(--transition);
         }
 
@@ -54,32 +60,384 @@
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            align-items: stretch;
+            height: 40px;
+        }
+
+        /* Nuevo estilo para el menú con submenús */
+        .nav-item {
+            position: relative;
+            display: flex;
             align-items: center;
         }
 
-        .nav-links a {
+        .nav-item > a {
             text-decoration: none;
-            color: var(--color-text);
-            font-size: 0.75rem; 
+            font-size: 0.65rem;
             font-weight: 600;
             transition: var(--transition);
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            white-space: nowrap;
+            color: white; /* Texto blanco para todos */
         }
 
-        .nav-links a:hover {
-            color: var(--color-primary);
+        /* Colores específicos para cada elemento del menú - ahora con fondo de color */
+        .nav-item:nth-child(1) > a {
+            background-color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) > a {
+            background-color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) > a {
+            background-color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) > a {
+            background-color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) > a {
+            background-color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) > a {
+            background-color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) > a {
+            background-color: var(--color-menu-7);
+        }
+
+        /* Hover para cada elemento del menú - ajustado para el nuevo estilo */
+        .nav-item:nth-child(1) > a:hover, .nav-item:nth-child(1):hover > a {
+            background-color: var(--color-menu-1);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(2) > a:hover, .nav-item:nth-child(2):hover > a {
+            background-color: var(--color-menu-2);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(3) > a:hover, .nav-item:nth-child(3):hover > a {
+            background-color: var(--color-menu-3);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(4) > a:hover, .nav-item:nth-child(4):hover > a {
+            background-color: var(--color-menu-4);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(5) > a:hover, .nav-item:nth-child(5):hover > a {
+            background-color: var(--color-menu-5);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(6) > a:hover, .nav-item:nth-child(6):hover > a {
+            background-color: var(--color-menu-6);
+            opacity: 0.9;
+        }
+        .nav-item:nth-child(7) > a:hover, .nav-item:nth-child(7):hover > a {
+            background-color: var(--color-menu-7);
+            opacity: 0.9;
+        }
+
+        /* Estilos para el submenú */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 180px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .nav-item:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu-header {
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+            font-size: 0.7rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Colores para los encabezados de submenú */
+        .nav-item:nth-child(1) .submenu-header {
+            background-color: var(--color-menu-1);
+            color: white;
+        }
+        .nav-item:nth-child(2) .submenu-header {
+            background-color: var(--color-menu-2);
+            color: white;
+        }
+        .nav-item:nth-child(3) .submenu-header {
+            background-color: var(--color-menu-3);
+            color: white;
+        }
+        .nav-item:nth-child(4) .submenu-header {
+            background-color: var(--color-menu-4);
+            color: white;
+        }
+        .nav-item:nth-child(5) .submenu-header {
+            background-color: var(--color-menu-5);
+            color: white;
+        }
+        .nav-item:nth-child(6) .submenu-header {
+            background-color: var(--color-menu-6);
+            color: white;
+        }
+        .nav-item:nth-child(7) .submenu-header {
+            background-color: var(--color-menu-7);
+            color: white;
+        }
+
+        .submenu-item {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.7rem;
+            transition: var(--transition);
+            display: block;
+            text-decoration: none;
+        }
+
+        /* Colores para los elementos del submenú */
+        .nav-item:nth-child(1) .submenu-item {
+            color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) .submenu-item {
+            color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) .submenu-item {
+            color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) .submenu-item {
+            color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) .submenu-item {
+            color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) .submenu-item {
+            color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) .submenu-item {
+            color: var(--color-menu-7);
+        }
+
+        /* Hover para los elementos del submenú */
+        .nav-item:nth-child(1) .submenu-item:hover {
+            background-color: rgba(78, 205, 196, 0.1);
+        }
+        .nav-item:nth-child(2) .submenu-item:hover {
+            background-color: rgba(108, 117, 125, 0.1);
+        }
+        .nav-item:nth-child(3) .submenu-item:hover {
+            background-color: rgba(126, 166, 224, 0.1);
+        }
+        .nav-item:nth-child(4) .submenu-item:hover {
+            background-color: rgba(161, 125, 195, 0.1);
+        }
+        .nav-item:nth-child(5) .submenu-item:hover {
+            background-color: rgba(181, 198, 137, 0.1);
+        }
+        .nav-item:nth-child(6) .submenu-item:hover {
+            background-color: rgba(248, 169, 120, 0.1);
+        }
+        .nav-item:nth-child(7) .submenu-item:hover {
+            background-color: rgba(229, 152, 155, 0.1);
+        }
+
+        /* Estilos para el submenú de tres columnas */
+        .mega-submenu {
+            position: absolute;
+            top: 100%;
+            left: -200px; /* Ajustado para centrar mejor */
+            background: white;
+            width: 800px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+
+        .nav-item:hover .mega-submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-submenu-header {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Colores para los encabezados de mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-header {
+            background-color: var(--color-menu-1);
+            color: white;
+        }
+        .nav-item:nth-child(2) .mega-submenu-header {
+            background-color: var(--color-menu-2);
+            color: white;
+        }
+        .nav-item:nth-child(3) .mega-submenu-header {
+            background-color: var(--color-menu-3);
+            color: white;
+        }
+        .nav-item:nth-child(4) .mega-submenu-header {
+            background-color: var(--color-menu-4);
+            color: white;
+        }
+        .nav-item:nth-child(5) .mega-submenu-header {
+            background-color: var(--color-menu-5);
+            color: white;
+        }
+        .nav-item:nth-child(6) .mega-submenu-header {
+            background-color: var(--color-menu-6);
+            color: white;
+        }
+        .nav-item:nth-child(7) .mega-submenu-header {
+            background-color: var(--color-menu-7);
+            color: white;
+        }
+
+        .mega-submenu-column {
+            width: 33.33%;
+            padding: 0 0.5rem;
+        }
+
+        .mega-submenu-column.half {
+            width: 50%;
+        }
+
+        .mega-submenu-column.full {
+            width: 100%;
+        }
+
+        .mega-submenu-section {
+            margin-bottom: 1rem;
+        }
+
+        .mega-submenu-section-title {
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Colores para los títulos de sección */
+        .nav-item:nth-child(1) .mega-submenu-section-title {
+            color: var(--color-menu-1);
+            border-bottom-color: rgba(78, 205, 196, 0.3);
+        }
+        .nav-item:nth-child(2) .mega-submenu-section-title {
+            color: var(--color-menu-2);
+            border-bottom-color: rgba(108, 117, 125, 0.3);
+        }
+        .nav-item:nth-child(3) .mega-submenu-section-title {
+            color: var(--color-menu-3);
+            border-bottom-color: rgba(126, 166, 224, 0.3);
+        }
+        .nav-item:nth-child(4) .mega-submenu-section-title {
+            color: var(--color-menu-4);
+            border-bottom-color: rgba(161, 125, 195, 0.3);
+        }
+        .nav-item:nth-child(5) .mega-submenu-section-title {
+            color: var(--color-menu-5);
+            border-bottom-color: rgba(181, 198, 137, 0.3);
+        }
+        .nav-item:nth-child(6) .mega-submenu-section-title {
+            color: var(--color-menu-6);
+            border-bottom-color: rgba(248, 169, 120, 0.3);
+        }
+        .nav-item:nth-child(7) .mega-submenu-section-title {
+            color: var(--color-menu-7);
+            border-bottom-color: rgba(229, 152, 155, 0.3);
+        }
+
+        .mega-submenu-item {
+            padding: 0.3rem 0.5rem;
+            font-size: 0.65rem;
+            transition: var(--transition);
+            display: block;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        /* Colores para los elementos del mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-item {
+            color: var(--color-menu-1);
+        }
+        .nav-item:nth-child(2) .mega-submenu-item {
+            color: var(--color-menu-2);
+        }
+        .nav-item:nth-child(3) .mega-submenu-item {
+            color: var(--color-menu-3);
+        }
+        .nav-item:nth-child(4) .mega-submenu-item {
+            color: var(--color-menu-4);
+        }
+        .nav-item:nth-child(5) .mega-submenu-item {
+            color: var(--color-menu-5);
+        }
+        .nav-item:nth-child(6) .mega-submenu-item {
+            color: var(--color-menu-6);
+        }
+        .nav-item:nth-child(7) .mega-submenu-item {
+            color: var(--color-menu-7);
+        }
+
+        /* Hover para los elementos del mega-submenú */
+        .nav-item:nth-child(1) .mega-submenu-item:hover {
+            background-color: rgba(78, 205, 196, 0.1);
+        }
+        .nav-item:nth-child(2) .mega-submenu-item:hover {
+            background-color: rgba(108, 117, 125, 0.1);
+        }
+        .nav-item:nth-child(3) .mega-submenu-item:hover {
+            background-color: rgba(126, 166, 224, 0.1);
+        }
+        .nav-item:nth-child(4) .mega-submenu-item:hover {
+            background-color: rgba(161, 125, 195, 0.1);
+        }
+        .nav-item:nth-child(5) .mega-submenu-item:hover {
+            background-color: rgba(181, 198, 137, 0.1);
+        }
+        .nav-item:nth-child(6) .mega-submenu-item:hover {
+            background-color: rgba(248, 169, 120, 0.1);
+        }
+        .nav-item:nth-child(7) .mega-submenu-item:hover {
+            background-color: rgba(229, 152, 155, 0.1);
         }
 
         .donate-btn {
             background: var(--color-primary);
             color: white;
             border: none;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.8rem; 
+            padding: 0 1rem;
+            height: 100%;
+            font-size: 0.65rem; 
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
         }
 
         .donate-btn:hover {
@@ -88,10 +446,72 @@
 
         .main-content {
             display: flex;
-            margin-top: 74px;
             padding: 2rem 5%;
             gap: 2rem;
-            justify-content: space-between; /* Updated padding and justify-content */
+            justify-content: space-between;
+        }
+
+        /* Nuevo estilo para el menú principal */
+        .main-menu-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 0 5%;
+            background-color: transparent;
+            margin-top: 2rem; /* Agregar margen superior para equilibrar con el logo */
+        }
+
+        .main-menu {
+            display: flex;
+            width: 100%;
+            height: 80px; /* Más alto para forma cuadrada */
+        }
+
+        .main-menu-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .main-menu-item > a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem; /* Texto más pequeño */
+            text-align: center;
+            padding: 0 0.5rem;
+            transition: var(--transition);
+            line-height: 1.2;
+        }
+
+        .main-menu-item:nth-child(1) > a {
+            background-color: var(--color-menu-1);
+        }
+        .main-menu-item:nth-child(2) > a {
+            background-color: var(--color-menu-2);
+        }
+        .main-menu-item:nth-child(3) > a {
+            background-color: var(--color-menu-3);
+        }
+        .main-menu-item:nth-child(4) > a {
+            background-color: var(--color-menu-4);
+        }
+        .main-menu-item:nth-child(5) > a {
+            background-color: var(--color-menu-5);
+        }
+        .main-menu-item:nth-child(6) > a {
+            background-color: var(--color-menu-6);
+        }
+
+        .main-menu-item > a:hover {
+            opacity: 0.9;
         }
 
         .carousel-container {
@@ -447,6 +867,10 @@
                 justify-self: center;
                 margin-bottom: 2rem;
             }
+            .mega-submenu {
+                width: 600px;
+                left: -100px;
+            }
         }
 
         @media (max-width: 1024px) {
@@ -465,6 +889,35 @@
             }
             .news-cards-container { /* Added media query for smaller screens */
                 grid-template-columns: 1fr;
+            }
+            
+            /* Ajustes para el menú en pantallas medianas */
+            .nav-links {
+                gap: 0;
+            }
+            
+            .nav-item > a {
+                font-size: 0.6rem;
+                padding: 0 0.5rem;
+            }
+            
+            .mega-submenu {
+                width: 500px;
+                left: -50px;
+            }
+            
+            .mega-submenu-column {
+                width: 50%;
+            }
+            
+            .mega-submenu-column:last-child {
+                width: 100%;
+            }
+            
+            /* Ajustes para el menú principal en pantallas medianas */
+            .main-menu-item > a {
+                font-size: 0.65rem;
+                padding: 0 0.25rem;
             }
         }
 
@@ -497,6 +950,25 @@
                 white-space: nowrap;
                 padding: 0.7rem 1rem;
             }
+            
+            /* Ajustes para el menú principal en pantallas pequeñas */
+            .main-menu {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .main-menu-item {
+                height: 40px;
+            }
+            
+            .main-menu-item > a {
+                font-size: 0.7rem;
+            }
+            
+            /* Ajuste para el logo en pantallas pequeñas */
+            .logo {
+                height: 50px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -518,19 +990,34 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <img src="https://itba-web-alumnos.vercel.app/ITBA_ITBAAlumnos_Identidad_Logos-01.png?height=40&width=100" alt="ITBA Logo" class="logo">
-        <div class="nav-links">
-            <a href="#">Información Importante</a>
-            <a href="#">Tramites y Servicios</a>
-            <a href="#">Bienestar</a>
-            <a href="#">Desarrollo Profesional</a>
-            <a href="#">Iniciativas Estudiantiles</a>
-            <a href="#">On Boarding</a>
-            <a href="#">Intercambios</a>
-            <button class="donate-btn">ACCESO ALUMNOS</button>
+    <!-- Logo centrado -->
+    <div class="logo-container">
+        <img src="https://itba-web-alumnos.vercel.app/ITBA_ITBAAlumnos_Identidad_Logos-01.png?height=60&width=150" alt="ITBA Logo" class="logo">
+    </div>
+    
+    <!-- Nuevo menú principal -->
+    <div class="main-menu-container">
+        <div class="main-menu">
+            <div class="main-menu-item">
+                <a href="#">Info ITBA</a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">Bienestar</a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">Desarrollo Profesional</a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">Iniciativas Estudiantiles</a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">Onboarding</a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">Intercambios</a>
+            </div>
         </div>
-    </nav>
+    </div>
 
     <div class="main-content">
         <div class="carousel-container">
@@ -668,4 +1155,3 @@
     </script>
 </body>
 </html>
-
