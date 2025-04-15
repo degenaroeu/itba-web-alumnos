@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info ITBA - Instituto Tecnológico de Buenos Aires</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --color-primary: #0056b3;
+            --color-secondary: #004085;
+            --color-accent: #17a2b8;
+            --color-background: #f8f9fa;
+            --color-text: #333;
+            --color-text-light: #6c757d;
+            --transition: all 0.3s ease;
+            
+            /* Colores para el menú */
+            --color-menu-1: #4ecdc4; /* Turquesa */
+            --color-menu-2: #6c757d; /* Gris */
+            --color-menu-3: #7ea6e0; /* Azul */
+            --color-menu-4: #a17dc3; /* Púrpura */
+            --color-menu-5: #b5c689; /* Verde */
+            --color-menu-6: #f8a978; /* Naranja */
+            --color-menu-7: #e5989b; /* Rosa */
+            
+            /* Colores para las categorías de información */
+            --color-info-1: #4ecdc4; /* Turquesa - Información Académica */
+            --color-info-2: #7ea6e0; /* Azul - Información Administrativa */
+            --color-info-3: #a17dc3; /* Púrpura - Experiencia Académica */
+            --color-info-4: #b5c689; /* Verde - Normativas */
+            --color-info-5: #f8a978; /* Naranja - Servicios */
+            --color-info-6: #e5989b; /* Rosa - Becas y Préstamos */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+
+        /* Nuevo estilo para el logo centrado */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            height: 60px; /* Logo más grande */
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Nuevo estilo para el menú principal */
+        .main-menu-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 0 5%;
+            background-color: transparent;
+            margin-top: 1.5rem; /* Agregar margen superior para equilibrar con el logo */
+        }
+
+        .main-menu {
+            display: flex;
+            width: 100%;
+            height: 80px; /* Más alto para forma cuadrada */
+            gap: 10px; /* Separación entre elementos del menú */
+        }
+
+        .main-menu-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border-radius: 5px; /* Bordes redondeados para cada elemento */
+            overflow: hidden;
+        }
+
+        .main-menu-item > a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem; /* Texto más pequeño */
+            text-align: center;
+            padding: 0 0.5rem;
+            transition: var(--transition);
+            line-height: 1.2;
+        }
+
+        /* Estilo para los iconos del menú */
+        .menu-icon {
+            margin-bottom: 8px;
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+
+        .main-menu-item:nth-child(1) > a {
+            background-color: var(--color-menu-1);
+        }
+        .main-menu-item:nth-child(2) > a {
+            background-color: var(--color-menu-2);
+        }
+        .main-menu-item:nth-child(3) > a {
+            background-color: var(--color-menu-3);
+        }
+        .main-menu-item:nth-child(4) > a {
+            background-color: var(--color-menu-4);
+        }
+        .main-menu-item:nth-child(5) > a {
+            background-color: var(--color-menu-5);
+        }
+        .main-menu-item:nth-child(6) > a {
+            background-color: var(--color-menu-6);
+        }
+
+        .main-menu-item > a:hover {
+            opacity: 0.9;
+        }
+
+        /* Estilos para la página de Info ITBA */
+        .page-title {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--color-primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-category {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .info-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .info-header {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .info-icon-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-icon {
+            width: 30px;
+            height: 30px;
+            color: white;
+        }
+
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-grow: 1;
+        }
+
+        .info-content {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-item {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .info-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .info-link {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-link:hover {
+            text-decoration: underline;
+        }
+
+        .info-link-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Colores específicos para cada categoría */
+        .info-category:nth-child(1) .info-icon-container {
+            background-color: var(--color-info-1);
+        }
+        .info-category:nth-child(1) .info-item::before {
+            background-color: var(--color-info-1);
+        }
+        .info-category:nth-child(1) .info-link:hover {
+            color: var(--color-info-1);
+        }
+
+        .info-category:nth-child(2) .info-icon-container {
+            background-color: var(--color-info-2);
+        }
+        .info-category:nth-child(2) .info-item::before {
+            background-color: var(--color-info-2);
+        }
+        .info-category:nth-child(2) .info-link:hover {
+            color: var(--color-info-2);
+        }
+
+        .info-category:nth-child(3) .info-icon-container {
+            background-color: var(--color-info-3);
+        }
+        .info-category:nth-child(3) .info-item::before {
+            background-color: var(--color-info-3);
+        }
+        .info-category:nth-child(3) .info-link:hover {
+            color: var(--color-info-3);
+        }
+
+        .info-category:nth-child(4) .info-icon-container {
+            background-color: var(--color-info-4);
+        }
+        .info-category:nth-child(4) .info-item::before {
+            background-color: var(--color-info-4);
+        }
+        .info-category:nth-child(4) .info-link:hover {
+            color: var(--color-info-4);
+        }
+
+        .info-category:nth-child(5) .info-icon-container {
+            background-color: var(--color-info-5);
+        }
+        .info-category:nth-child(5) .info-item::before {
+            background-color: var(--color-info-5);
+        }
+        .info-category:nth-child(5) .info-link:hover {
+            color: var(--color-info-5);
+        }
+
+        .info-category:nth-child(6) .info-icon-container {
+            background-color: var(--color-info-6);
+        }
+        .info-category:nth-child(6) .info-item::before {
+            background-color: var(--color-info-6);
+        }
+        .info-category:nth-child(6) .info-link:hover {
+            color: var(--color-info-6);
+        }
+
+        footer {
+            background-color: #0a0f1c;
+            color: white;
+            padding: 4rem 5%;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .footer-logo img {
+            filter: brightness(0) invert(1);
+            max-width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .footer-logo img:hover {
+            opacity: 0.8;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 2;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        @media (max-width: 1200px) {
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-logo {
+                grid-column: 1 / -1;
+                justify-self: center;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Ajustes para el menú principal en pantallas medianas */
+            .main-menu {
+                gap: 5px;
+            }
+            
+            .main-menu-item > a {
+                font-size: 0.65rem;
+                padding: 0 0.25rem;
+            }
+            
+            .menu-icon {
+                width: 20px;
+                height: 20px;
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Ajustes para el menú principal en pantallas pequeñas */
+            .main-menu {
+                flex-direction: column;
+                height: auto;
+                gap: 5px;
+            }
+            
+            .main-menu-item {
+                height: 40px;
+            }
+            
+            .main-menu-item > a {
+                font-size: 0.7rem;
+                flex-direction: row;
+            }
+            
+            .menu-icon {
+                margin-bottom: 0;
+                margin-right: 8px;
+                width: 18px;
+                height: 18px;
+            }
+            
+            /* Ajuste para el logo en pantallas pequeñas */
+            .logo {
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            .footer-section {
+                text-align: center;
+            }
+            .info-container {
+                padding: 0 1rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo centrado -->
+    <div class="logo-container">
+        <img src="https://itba-web-alumnos.vercel.app/ITBA_ITBAAlumnos_Identidad_Logos-01.png?height=60&width=150" alt="ITBA Logo" class="logo">
+    </div>
+    
+    <!-- Menú principal con iconos y separación -->
+    <div class="main-menu-container">
+        <div class="main-menu">
+            <div class="main-menu-item">
+                <a href="info-itba.html">
+                    <i data-lucide="info" class="menu-icon"></i>
+                    Info ITBA
+                </a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">
+                    <i data-lucide="heart" class="menu-icon"></i>
+                    Bienestar
+                </a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">
+                    <i data-lucide="briefcase" class="menu-icon"></i>
+                    Desarrollo Profesional
+                </a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">
+                    <i data-lucide="users" class="menu-icon"></i>
+                    Iniciativas Estudiantiles
+                </a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">
+                    <i data-lucide="compass" class="menu-icon"></i>
+                    Onboarding
+                </a>
+            </div>
+            <div class="main-menu-item">
+                <a href="#">
+                    <i data-lucide="globe" class="menu-icon"></i>
+                    Intercambios
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal de Info ITBA -->
+    <h1 class="page-title">Información ITBA</h1>
+    
+    <div class="info-container">
+        <div class="info-grid">
+            <!-- Información Académica -->
+            <div class="info-category">
+                <div class="info-header">
+                    <div class="info-icon-container">
+                        <i data-lucide="book-open" class="info-icon"></i>
+                    </div>
+                    <h2 class="info-title">Información Académica</h2>
+                </div>
+                <div class="info-content">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="calendar" class="info-link-icon"></i>
+                                Calendario académico
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="clipboard-list" class="info-link-icon"></i>
+                                Matriculación Materias, SAT, PPS
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="file-text" class="info-link-icon"></i>
+                                Exámenes Finales
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="check-circle" class="info-link-icon"></i>
+                                Validación inglés
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="grid" class="info-link-icon"></i>
+                                Grillas
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="book" class="info-link-icon"></i>
+                                Planes de estudio
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Información Administrativa -->
+            <div class="info-category">
+                <div class="info-header">
+                    <div class="info-icon-container">
+                        <i data-lucide="clipboard" class="info-icon"></i>
+                    </div>
+                    <h2 class="info-title">Información Administrativa</h2>
+                </div>
+                <div class="info-content">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="award" class="info-link-icon"></i>
+                                Certificaciones
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="file" class="info-link-icon"></i>
+                                Documentación Obligatoria
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="credit-card" class="info-link-icon"></i>
+                                Facturación
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="alert-triangle" class="info-link-icon"></i>
+                                Inhibiciones
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="graduation-cap" class="info-link-icon"></i>
+                                Graduaciones
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Experiencia Académica -->
+            <div class="info-category">
+                <div class="info-header">
+                    <div class="info-icon-container">
+                        <i data-lucide="lightbulb" class="info-icon"></i>
+                    </div>
+                    <h2 class="info-title">Experiencia Académica</h2>
+                </div>
+                <div class="info-content">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="users" class="info-link-icon"></i>
+                                Ayudantías
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="clipboard-check" class="info-link-icon"></i>
+                                Tareas en la universidad
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="layers" class="info-link-icon"></i>
+                                Proyectos
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Normativas -->
+            <div class="info-category">
+                <div class="info-header">
+                    <div class="info-icon-container">
+                        <i data-lucide="file-text" class="info-icon"></i>
+                    </div>
+                    <h2 class="info-title">Normativas</h2>
+                </div>
+                <div class="info-content">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="file-plus" class="info-link-icon"></i>
+                                Boletín general
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="book" class="info-link-icon"></i>
+                                Reglamentaciones
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Servicios -->
+            <div class="info-category">
+                <div class="info-header">
+                    <div class="info-icon-container">
+                        <i data-lucide="settings" class="info-icon"></i>
+                    </div>
+                    <h2 class="info-title">Servicios</h2>
+                </div>
+                <div class="info-content">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="printer" class="info-link-icon"></i>
+                                Impresora
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="https://sites.google.com/itba.edu.ar/impresioneslaboratoriomd/p%C3%A1gina-principal" class="info-link" target="_blank">
+                                <i data-lucide="box" class="info-link-icon"></i>
+                                Impresión 3D
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="lock" class="info-link-icon"></i>
+                                Lockers
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="repeat" class="info-link-icon"></i>
+                                Préstamos
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="https://docs.google.com/forms/d/1_dYJj-oB96FLAMrsNqEYJeV5vc1JxlkKz4XDCSWJoy8/viewform?edit_requested=true#responses" class="info-link" target="_blank">
+                                <i data-lucide="gift" class="info-link-icon"></i>
+                                Donación de libros
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="party-popper" class="info-link-icon"></i>
+                                Kit de festejo responsable
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="layout-dashboard" class="info-link-icon"></i>
+                                Aulas Libres
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="calendar" class="info-link-icon"></i>
+                                Cronograma de aulas
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="map-pin" class="info-link-icon"></i>
+                                Reserva TuEspacioITBA
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="laptop" class="info-link-icon"></i>
+                                Servicios TI para estudiantes
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Becas y Préstamos de honor -->
+            <div class="info-category">
+                <div class="info-header">
+                    <div class="info-icon-container">
+                        <i data-lucide="award" class="info-icon"></i>
+                    </div>
+                    <h2 class="info-title">Becas y Préstamos de honor</h2>
+                </div>
+                <div class="info-content">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="star" class="info-link-icon"></i>
+                                Información sobre becas
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="file-text" class="info-link-icon"></i>
+                                Solicitud de préstamos
+                            </a>
+                        </li>
+                        <li class="info-item">
+                            <a href="#" class="info-link">
+                                <i data-lucide="calendar" class="info-link-icon"></i>
+                                Fechas importantes
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://www.itba.edu.ar/wp-content/uploads/2021/08/ITBA-logo3.png" alt="ITBA Logo">
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Somos ITBA</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Institucional</a></li>
+                    <li><a href="#" class="footer-link">Autoridades</a></li>
+                    <li><a href="#" class="footer-link">Docentes</a></li>
+                    <li><a href="#" class="footer-link">Graduados</a></li>
+                    <li><a href="#" class="footer-link">Empleos y pasantías</a></li>
+                    <li><a href="#" class="footer-link">Experiencia ITBA</a></li>
+                    <li><a href="#" class="footer-link">Sedes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Oferta Académica</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Grado</a></li>
+                    <li><a href="#" class="footer-link">Postgrado</a></li>
+                    <li><a href="#" class="footer-link">Educación ejecutiva</a></li>
+                    <li><a href="#" class="footer-link">Doctorado</a></li>
+                    <li><a href="#" class="footer-link">Servicios Corporativos</a></li>
+                    <li><a href="#" class="footer-link">ITBA global</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Becas</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Ingreso Ingenierías</a></li>
+                    <li><a href="#" class="footer-link">Ingreso Licenciaturas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Investigación y desarrollo</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Extensión</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Campus</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Intranet</a></li>
+                    <li><a href="#" class="footer-link">Biblioteca</a></li>
+                    <li><a href="#" class="footer-link">Noticias</a></li>
+                    <li><a href="#" class="footer-link">Trabajá con nosotros</a></li>
+                    <li><a href="#" class="footer-link">Portal de Compras</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar los iconos de Lucide
+        lucide.createIcons();
+    </script>
+</body>
+</html>
